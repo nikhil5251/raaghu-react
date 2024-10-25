@@ -14,7 +14,7 @@ const meta: Meta = {
             control: { type: "select" },
         },
         inputType: {
-            options: ["email", "text", "password", "otp"],
+            options: ["email", "text", "password", "otp", "number"],
             control: { type: "select" },
         },
         labelPosition: {
@@ -24,6 +24,10 @@ const meta: Meta = {
         tooltipPlacement: {
             options: ["top", "bottom", "right", "left"],
             control: { type: "radio" },
+        },
+        fontWeight: {
+            options: ["normal", "bold", "light"],
+            control: { type: "select" },
         },
     },
 } satisfies Meta<typeof RdsInput>;
@@ -38,14 +42,16 @@ export const Default: Story = {
         placeholder: "Add Placeholder",
         label: "Label",
         labelPosition: "top",
-        id: "",
+        id: "default-input",
         value: "",
         required: true,
         showIcon: true,
         singleDigit: false,
-    }
+        fontWeight: "normal",
+    },
 } satisfies Story;
-Default.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'singleDigit'] } };
+
+Default.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'singleDigit', 'fontWeight'] } };
 
 export const Tooltip: Story = {
     args: {
@@ -54,15 +60,17 @@ export const Tooltip: Story = {
         placeholder: "Add Placeholder",
         label: "Label",
         labelPosition: "top",
-        id: "",
+        id: "tooltip-input",
         value: "",
         required: true,
         tooltipPlacement: "top",
         tooltipTitle: "This is tooltip",
         showIcon: true,
-    }
+        fontWeight: "normal",
+    },
 } satisfies Story;
-Tooltip.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'tooltipPlacement', 'tooltipTitle', 'showIcon'] } };
+
+Tooltip.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'tooltipPlacement', 'tooltipTitle', 'showIcon', 'fontWeight'] } };
 
 export const Disabled: Story = {
     args: {
@@ -71,14 +79,16 @@ export const Disabled: Story = {
         placeholder: "Add Placeholder",
         label: "Label",
         labelPosition: "top",
-        id: "",
+        id: "disabled-input",
         value: "",
         required: true,
         isDisabled: true,
         showIcon: true,
-    }
+        fontWeight: "normal",
+    },
 } satisfies Story;
-Disabled.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'isDisabled', 'showIcon'] } };
+
+Disabled.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'isDisabled', 'showIcon', 'fontWeight'] } };
 
 export const Readonly: Story = {
     args: {
@@ -87,14 +97,16 @@ export const Readonly: Story = {
         placeholder: "Add Placeholder",
         label: "Label",
         labelPosition: "top",
-        id: "",
+        id: "readonly-input",
         value: "",
         required: true,
         readonly: true,
         showIcon: true,
-    }
+        fontWeight: "normal",
+    },
 } satisfies Story;
-Readonly.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'readonly', 'showIcon'] } };
+
+Readonly.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'readonly', 'showIcon', 'fontWeight'] } };
 
 export const Email: Story = {
     args: {
@@ -103,14 +115,16 @@ export const Email: Story = {
         placeholder: "Add Email",
         label: "Email",
         labelPosition: "top",
-        id: "",
+        id: "email-input",
         value: "",
         required: true,
         readonly: false,
         showIcon: true,
-    }
+        fontWeight: "normal",
+    },
 } satisfies Story;
-Email.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required',, 'readonly'] } };
+
+Email.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'readonly', 'showIcon', 'fontWeight'] } };
 
 export const Password: Story = {
     args: {
@@ -119,60 +133,37 @@ export const Password: Story = {
         placeholder: "Add Password",
         label: "Password",
         labelPosition: "top",
-        id: "",
+        id: "password-input",
         value: "",
         required: true,
         readonly: false,
         showIcon: true,
-    }
+        fontWeight: "normal",
+    },
 } satisfies Story;
-Password.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly'] } };
 
-export const Label: Story = {
-    args: {
-        size: "medium",
-        inputType: "number",
-        placeholder: "Add Label",
-        label: "Label",
-        labelPosition: "top",
-        id: "",
-        value: "",
-        required: true,
-        readonly: false,
-        showIcon: true,
-    }
-} satisfies Story;
-Label.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly'] } };
-export const PhoneNo: Story = {
-    args: {
-        size: "medium",
-        inputType: "number",
-        placeholder: "Add PhoneNo",
-        label: "PhoneNo",
-        labelPosition: "top",
-        id: "",
-        value: "",
-        required: true,
-        readonly: false,
-        showIcon: true,
-    }
-} satisfies Story;
-PhoneNo.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly'] } };
-export const Numbers: Story = {
+Password.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly', 'fontWeight'] } };
+
+export const NumberInput: Story = {
     args: {
         size: "medium",
         inputType: "number",
         placeholder: "Add Number",
         label: "Number",
         labelPosition: "top",
-        id: "",
+        id: "number-input",
         value: "",
         required: true,
         readonly: false,
         showIcon: true,
-    }
+        fontWeight: "normal",
+        minValue: 1,
+        maxValue: 100,
+    },
 } satisfies Story;
-Numbers.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly'] } };
+
+NumberInput.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly', 'minValue', 'maxValue', 'fontWeight'] } };
+
 export const CardNumber: Story = {
     args: {
         size: "medium",
@@ -180,11 +171,15 @@ export const CardNumber: Story = {
         placeholder: "xxxx xxxx xxxx xxxx",
         label: "Card Number",
         labelPosition: "top",
-        id: "",
+        id: "card-number-input",
         value: "",
         required: true,
         readonly: false,
         showIcon: true,
-    }
+        fontWeight: "normal",
+        minLength: 16,
+        maxLength: 16,
+    },
 } satisfies Story;
-CardNumber.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly'] } };
+
+CardNumber.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly', 'minLength', 'maxLength', 'fontWeight'] } };
