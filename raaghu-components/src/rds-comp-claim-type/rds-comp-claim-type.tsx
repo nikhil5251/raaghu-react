@@ -88,7 +88,7 @@ const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
                             reset={inputReset}
                         />
                     </div>
-                    <div className="col-md-6 mb-md-0 mb-3  pt-2">
+                    <div className="col-md-6 mb-md-0 mb-3 pt-2 ">
                         <RdsSelectList
                             id="idenval"
                             label="Value Type"

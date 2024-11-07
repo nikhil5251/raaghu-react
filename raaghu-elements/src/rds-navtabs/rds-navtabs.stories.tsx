@@ -156,6 +156,23 @@ export const WithIcon: Story = {
 } satisfies Story;
 WithIcon.parameters = { controls: { include: ['navtabsItems', 'type', 'fill', 'justified','layout','style'] } };
 
+export const IconOnly: Story = {
+    args: {
+        navtabsItems: [
+            { label: "", tablink: "#nav-home", ariacontrols: "nav-home", subText: "Active subtext", id: "active", icon: "administration" },
+            { label: "", tablink: "#nav-profile", ariacontrols: "nav-profile", id: "home", icon: "home" },
+            { label: "", tablink: "#nav-contact", ariacontrols: "nav-contact", subText: "Home subtext", id: "about", icon: "profile_picture" },
+            { label: "", tablink: "#nav-deabled", disabled: true, subText: "Disble subtext", id: "disabled", icon: "eye_slash" },
+        ],
+        type: "default",
+        fill: false,
+        justified: false,
+        layout:"Horizontal",
+        iconOnly: true
+    }
+} satisfies Story;
+IconOnly.parameters = { controls: { include: ['navtabsItems', 'type', 'fill', 'justified','layout','style'] } };
+
 
 
 

@@ -3,7 +3,7 @@ import RdsDropdown from "./rds-dropdown";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta = {
-    title: 'Elements/Dropdown',
+    title: 'Elements/Dropdown Button',
     component: RdsDropdown,
     parameters: {
         layout: 'padded',

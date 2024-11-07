@@ -2,33 +2,38 @@ import React, { useEffect, useState } from "react";
 import "./rds-breadcrumb.css";
 import RdsIcon from "../rds-icon";
 
-// export interface BreadcrumbItem {
-//   label: string;
-//   id: number;
-//   route?: string;
-//   disabled?: boolean;
-//   icon?: string;
-//   iconFill?: boolean;
-//   iconstroke?: boolean;
-//   iconWidth?: string;
-//   iconHeight?: string;
-//   iconColor?: string;
-//   active?: boolean;
-// }
-
 export interface BreadcrumbProps {
   breadcrumbItems: any[];
-  type?: "Simple" | "Background";
-  shape?: "Pill Background" | "Square Background";
+  title?: string;
+  style?: "Pill Background" | "Square Background" | "Without Background";
   separator?: ">" | "/" | "→" | "»" | "|" | "-";
+  level?: "Level 1" | "Level 2" | "Level 3" | "Level 4" | "Level 5";
+  icon?: string;
+  showIcon?: boolean;
 }
 
 const RdsBreadcrumb = (props: BreadcrumbProps) => {
-  const [data, setData] = useState(props.breadcrumbItems);
+  const [data, setData] = useState(() => {
+    const initialData = props.breadcrumbItems.map((item, index) => ({
+      ...item,
+      active: index === props.breadcrumbItems.length - 1, // Set the last item as active by default
+    }));
+    return initialData;
+  });  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   useEffect(() => {
     setData(props.breadcrumbItems);
   }, [props.breadcrumbItems]);
+
+  const levelMap = {
+    "Level 1": 1,
+    "Level 2": 2,
+    "Level 3": 3,
+    "Level 4": 4,
+    "Level 5": 5,
+  };
+
+  const displayedItems = props.level ? data.slice(0, levelMap[props.level]) : data;
 
   const onClickHandler = (key: number) => {
     setData(
@@ -38,46 +43,53 @@ const RdsBreadcrumb = (props: BreadcrumbProps) => {
       }))
     );
   };
+  const styleClass =
+  props.style === "Pill Background"
+    ? "breadcrumb-pill background-filled"
+    : props.style === "Square Background"
+    ? "breadcrumb-square background-filled"
+    : "";
 
-  const shapeClass = props.shape ? `breadcrumb-${props.shape}` : "";
-  const noBgClass = props.shape ? `breadcrumb-${props.shape}-no-bg` : "";
-  const roundedClass =
-    props.shape === "Pill Background"
+    const roundedClass =
+    props.style === "Pill Background"
       ? "rounded-5 px-2"
-      : props.shape === "Square Background"
+      : props.style === "Square Background"
       ? "rounded-2 px-2"
       : "";
-
-  return (
-    <nav aria-label="breadcrumb">
-      <ol
-        className={`breadcrumb m-0 ${
-          props.type === "Background" ? "breadcrumb-background" : ""
-        }`}
-      >
-        {data.map((breadItem, index) => {
-          const isLastItem = index === data.length - 1;
-
+  
+      return (
+        <nav aria-label="breadcrumb">
+          <ol className={`breadcrumb m-0 `}>
+            {displayedItems.map((breadItem, index) => {
+              const isLastItem = index === displayedItems.length - 1;
+              const isAnyOtherItemActive = displayedItems.some((item, idx) => item.active && idx !== index);
+      
+              const itemClassNames = `breadcrumb-item ${
+                breadItem.active && !isLastItem ? `active ${styleClass} `: ""
+              } ${
+                isLastItem && !isAnyOtherItemActive ?   `active ${styleClass} ` : ""
+              } ${
+                !isLastItem && breadItem.active && props.style !== "Without Background" ? "" : ""
+              } ${
+                breadItem.active ? styleClass : ""
+              } ${
+                isLastItem && isAnyOtherItemActive ? roundedClass : roundedClass
+              } ${
+                props.style === "Without Background" ? "ms-2 me-2" : ""
+              }`;
+              
           return (
             <React.Fragment key={breadItem.id}>
               <li
-                className={`breadcrumb-item ${
-                  breadItem.active ? "active" : ""
-                } ${isLastItem ? "text-primary" : ""} ${
-                  props.type === "Background"
-                    ? isLastItem
-                      ? `${shapeClass} bg-primary-subtle`
-                      : "bg-transparent"
-                    : ""
-                } ${
-                  !isLastItem && breadItem.active ? noBgClass : ""
-                } ${roundedClass}`}
+                className={itemClassNames}
                 onClick={() => onClickHandler(breadItem.id)}
+                onMouseEnter={() => setHoveredItem(breadItem.id)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
-                {breadItem.icon && (
+                {props.showIcon && props.icon && (
                   <span className="me-2">
                     <RdsIcon
-                      name={breadItem.icon}
+                      name={props.icon}
                       fill={breadItem.iconFill}
                       stroke={breadItem.iconstroke}
                       width={breadItem.iconWidth}
@@ -93,12 +105,10 @@ const RdsBreadcrumb = (props: BreadcrumbProps) => {
                   onClick={(e) => e.preventDefault()}
                   aria-disabled="true"
                 >
-                  {breadItem.label}
+                  {props.title}
                 </a>
               </li>
-              {!isLastItem && (
-                <li className="breadcrumb-separator">{props.separator}</li>
-              )}
+              {!isLastItem && <li className="breadcrumb-separator">{props.separator}</li>}
             </React.Fragment>
           );
         })}

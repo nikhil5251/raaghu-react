@@ -11,7 +11,7 @@ export interface RdsNavtabsProps {
         icon?: string;
         subText?: string;
         disabled?: boolean;
-        id: any;
+        id: any;        
     }[];
     type: "default"  | "tabs";
     fill?: boolean;
@@ -23,6 +23,7 @@ export interface RdsNavtabsProps {
     onClick?: React.MouseEvent<HTMLElement>;
     layout?:string;
     style?:string;
+    iconOnly?: boolean;
 }
 
 const RdsNavtabs = (props: RdsNavtabsProps) => {
@@ -54,7 +55,8 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
       ? " flex-lg-row flex-md-row flex-xl-row flex-xxl-row justify-content-start nav-tabs pb-0 pb-lg-0 pb-md-0 pb-xl-0 pb-xxl-0"
       : " nav-tabs") +
     (props.fill ? " nav-fill" : "") +
-    (props.justified ? " nav-justified" : "")
+    (props.justified ? " nav-justified" : "")+
+    (props.iconOnly ? " nav-icon-only" : "")
   }
 >
   {props.navtabsItems.map((navtabsItem) => (
@@ -124,7 +126,9 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
             />
           </span>
         )}
-        <span className="fw-medium px-3">{navtabsItem.label}</span>
+        {!props.iconOnly && (
+    <span className="fw-medium px-3">{navtabsItem.label}</span>
+)}
       </a>
     </li>
   ))}

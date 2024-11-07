@@ -15,32 +15,27 @@ const RdsPolarAreaChart = (props: RdsPolarAreaChartProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstanceRef = useRef<Chart<"polarArea", number[], unknown> | null>(null);
     const CanvasId = props.id;
-    let ctx;
-
-
     useEffect(() => {
         const canvasElm = canvasRef.current;
-        if (!canvasElm) return;
-        ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
-        
-        // Destroy the existing chart if it exists
-        if (chartInstanceRef.current) {
-            chartInstanceRef.current.destroy();
+        const ctx = canvasElm?.getContext("2d");
+
+        if (ctx) {
+            const ploarCanvas = new Chart(ctx, {
+                type: "polarArea",
+                data: {
+                    labels: props.labels,
+                    datasets: props.dataSets,
+                },
+                options: props.options,
+            });
+            ploarCanvas.canvas.style.height = props.height + "px";
+            ploarCanvas.canvas.style.width = props.width + "px";
+
+            return () => {
+                ploarCanvas.destroy();
+            };
         }
-        const PolarCanvas = new Chart(ctx, {
-            type: "polarArea",
-            data: {
-                labels: props.labels,
-                datasets: props.dataSets
-            },
-            options: props.options,
-        });
-        if (PolarCanvas != null) {
-        PolarCanvas.canvas.style.height = props.height + "px";
-        PolarCanvas.canvas.style.width = props.width + "px";
-        chartInstanceRef.current = PolarCanvas; // Store the chart instance
-        }
-    });
+    }, [props.height, props.width]);
 
     return (
         <div>

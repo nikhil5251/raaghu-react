@@ -7,8 +7,8 @@ export interface RdsCarouselProps {
     Indicators: boolean;
     crossFade?: boolean;
     controls?: boolean;
+    IndicatorType?: string;
     carouselItems: any[];
-    IndicatorType:string;
 }
 
 const RdsCarousel = (props: RdsCarouselProps) => {

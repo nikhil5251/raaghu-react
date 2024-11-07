@@ -80,7 +80,7 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
                         </div>
 
                     </div>
-                    <div className="row">
+                    <div className="row mt-1">
                         <RdsTextArea
                             label="Description"
                             placeholder="Enter description"
