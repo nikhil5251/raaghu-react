@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
 export interface RdsMixedChartProps {
@@ -12,33 +12,33 @@ export interface RdsMixedChartProps {
 }
 
 const RdsMixedChart = (props: RdsMixedChartProps) => {
-    const CanvasId = props.id;
-    let ctx;
-
-
+    
+const canvasRef = useRef<HTMLCanvasElement | null>(null);
     useEffect(() => {
-        const canvasElm = document.getElementById(
-            CanvasId
-        ) as HTMLCanvasElement | null;
-        ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
+        const canvasElm = canvasRef.current;
+        const ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
 
-        const MixedCanvas = new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: props.labels,
-                datasets: props.dataSets
-            },
-            options: props.options,
-        });
-        MixedCanvas.canvas.style.height = props.height + "px";
-        MixedCanvas.canvas.style.width = props.width + "px";
-    });
+        if (ctx) {
+            const mixedCanvas = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: props.labels,
+                    datasets: props.dataSets,
+                },
+                options: props.options,
+            });
+
+            return () => {
+                mixedCanvas.destroy();
+            };
+        }
+    }, [props.height, props.width]);
 
     return (
         <div>
-            <canvas id={CanvasId} ref={ctx} />
+            <canvas data-testid={props.id} id={props.id} ref={canvasRef} />
         </div>
     );
-};
+    };
 
 export default RdsMixedChart;

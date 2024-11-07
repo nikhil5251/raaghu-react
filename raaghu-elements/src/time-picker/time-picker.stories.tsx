@@ -30,6 +30,14 @@ import React from 'react';
                                 "compact",
                         ],
                         control: { type: "select" },
+                },
+                state: {
+                        options: [
+                                "default",
+                                "expanded",
+                                "selected"
+                        ],
+                        control: { type: "select" },
                 }
             },
         } as Meta;
@@ -40,5 +48,6 @@ import React from 'react';
         Default.args = {
                 colorVariant: "primary",
                 style: "default",
+                state: "default"
         };
-        Default.parameters = { controls: { include: ['colorVariant','style'] } };
+        Default.parameters = { controls: { include: ['colorVariant','style','state'] } };

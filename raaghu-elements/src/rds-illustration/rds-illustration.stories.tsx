@@ -3,7 +3,7 @@ import { StoryObj, Meta } from "@storybook/react";
 import RdsIllustration from "./rds-illustration";
 
 const meta: Meta = {
-    title: 'Elements/Illustration',
+    title: 'Elements/Empty State',
     component: RdsIllustration,
     parameters: {
         layout: 'padded',

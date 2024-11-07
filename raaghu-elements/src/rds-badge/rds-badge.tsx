@@ -30,11 +30,14 @@ export interface RdsBadgeProps {
     isTextWithIcon?: boolean;
     isOutline?: boolean;
     isIconBorder?: boolean;
+    layout?: string;
+    style?: string
+    state?: string
 }
 
 const RdsBadge = (props: RdsBadgeProps) => {
     const classes = () => {
-        let defaultClass: string =  props.className ? props.className : '';
+        let defaultClass: string = props.className ? props.className : '';
         const name: string = !props.name ? "" : props.name.toLowerCase();
         const icon = Icons.hasOwnProperty(name) ? Icons[name] : Flags[name];
         if (props.size) {
@@ -59,7 +62,7 @@ const RdsBadge = (props: RdsBadgeProps) => {
             defaultClass = defaultClass + " pe-2";
         }
 
-        if(props.type === "icon" || props.type === "lottie") {
+        if (props.type === "icon" || props.type === "lottie") {
             const customIconClass = ` d-flex align-items-center gap-3`;
             defaultClass = defaultClass + customIconClass;
         }
@@ -76,11 +79,11 @@ const RdsBadge = (props: RdsBadgeProps) => {
             <span className={`badge badge-` + (props.colorVariant) + ` ${props.isTextWithIcon ? 'text-with-icon' : ''} ${props.isIconBorder ? 'border-icon' : ''} ${props.isOutline ? 'badge-outline bg-transparent' : ''} ${classes()} `}>
                 {props.iconName && props.isIconshow === true && Icons.hasOwnProperty(props.iconName) && (
                     <RdsIcon
-                    name={props.iconName}
-                    fill={props.iconFill}
-                    stroke={props.iconStroke}
-                    width={props.iconWidth}
-                    height={props.iconHeight}
+                        name={props.iconName}
+                        fill={props.iconFill}
+                        stroke={props.iconStroke}
+                        width={props.iconWidth}
+                        height={props.iconHeight}
                     />
                 )}
                 {props.iconName && props.iconPosition === 'left' && Icons.hasOwnProperty(props.iconName) && (
@@ -92,7 +95,7 @@ const RdsBadge = (props: RdsBadgeProps) => {
                         height={props.iconHeight}
                     />
                 )}
-                
+
                 <span className="mb-0">{props.label}</span>
 
                 {props.iconName && props.iconPosition === 'right' && Icons.hasOwnProperty(props.iconName) && (

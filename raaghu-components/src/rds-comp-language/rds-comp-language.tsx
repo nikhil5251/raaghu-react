@@ -121,7 +121,7 @@ const RdsCompLanguage = (props: RdsCompLanguageProps) => {
                                 <div className="form-group">
                                     <RdsSelectList
                                         id="langU"
-                                        label="Ui Culture Name"
+                                        label="UI Culture Name"
                                         selectItems={props.cultureList}
                                         selectedValue={cultureUIName}
                                         onChange={(item: any) => onChangeSelectList("cultureUIName", item.value)}

@@ -50,12 +50,11 @@ const isFormValid = isFullnameValid(formData?.fullname) && isEmailValid(formData
 const emailhandleChange = (value: any, key: string) => {
     setFormData({ ...formData, [key]: value });
     if (value.trim() === "") {
-        setErrorForEmail("");
-    }
-    else if (!isEmailValid(value)) {
-        setErrorForEmail("Email ID is invalid");
+        setErrorForEmail("Email ID is required"); 
+    } else if (!isEmailValid(value)) {
+        setErrorForEmail("Email ID is invalid"); 
     } else {
-        setErrorForEmail("");
+        setErrorForEmail(""); 
     }
     
 }
@@ -129,10 +128,10 @@ function emitSaveData(event: any) {
                     <div className=" mb-4">
                         <RdsTextArea
                             label='Message'
+                            reset={inputReset}
                             placeholder='Message'
                             isRequired={true}
                             onChange= {(e) =>{messagehandleChange(e.target.value , "message");}}
-
                             rows={3}
                             value={formData?.message}
                             dataTestId="message"

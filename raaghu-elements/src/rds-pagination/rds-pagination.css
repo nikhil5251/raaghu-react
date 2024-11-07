@@ -45,6 +45,7 @@
   .page-item.active a {
     background-color: #ced4da; /* Customize as needed */
     color: #343a40;
+    font-weight: 700;
    /* // border-color: #007bff; */
   }
   
@@ -60,4 +61,3 @@
   .page-item.roundeds a {
     border-radius: 50%;
   }
-  

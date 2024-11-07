@@ -136,3 +136,14 @@
 .small-placeholder {
   font-size: 12px; 
 }
+.deleteOptionCss{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fileFormat{
+  font-size: 12px !important;
+}
+.custom-file-button-rounded{
+  border-radius: 50%;
+}
