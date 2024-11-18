@@ -193,7 +193,7 @@ const RdsAvatar = (props: RdsAvatarProps) => {
           <div key={index} className="avatar">
             <img
               src={avatar.profilePic || defaultPP}
-              className={classes() + getBorderClasses(props.border)}
+              className={classes() + getBorderClasses(props.border) +"rounded-3"}
               alt="profile-default"
             />
           </div>
@@ -273,7 +273,7 @@ const RdsAvatar = (props: RdsAvatarProps) => {
           <div className={`flex-grow-0 align-items-center ${Aligned}`}>
             <img
               src={defaultPP}
-              className={classes() + getBorderClasses(props.border)}
+              className={classes() + getBorderClasses(props.border) + "rounded-3"}
               alt="profile-default"
             />
           </div>

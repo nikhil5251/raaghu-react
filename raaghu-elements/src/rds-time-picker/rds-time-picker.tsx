@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './time-picker.css';
+import './rds-time-picker.css';
 import RdsIcon from '../rds-icon/rds-icon';
 
 export interface RdsTimePickerProps {

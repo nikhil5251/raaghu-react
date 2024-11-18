@@ -9,8 +9,8 @@ const colorVariantArgTypes = {
 const textAlignArgTypes = {
     titleAlign: {
         options: ["horizontal", "vertical"],
-        control: { type: "select" },
-    },
+        control: { type: "select"},
+    }as const,
 };
 
 const meta: Meta = {

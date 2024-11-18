@@ -5,10 +5,7 @@ import RdsAvatar from "../rds-avatar";
 import "./rds-card.css";
 import RdsButton from "../rds-button";
 import RdsIcon from "../rds-icon";
-import { isDisabled } from "@testing-library/user-event/dist/types/utils";
 import RdsLabel from "../rds-label";
-import RdsDatepicker from "../rds-datepicker";
-import { RdsDatePicker } from "..";
 
 
 export interface RdsCardProps {

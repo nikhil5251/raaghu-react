@@ -3,7 +3,6 @@ import RdsProgressBar from "./rds-progress-bar";
 import { progress_colors } from "../../libs/types/colorvariant";
 import { Meta, StoryObj } from "@storybook/react";
 
-
 const meta: Meta = {
     title: 'Elements/ProgressBar',
     component: RdsProgressBar,
