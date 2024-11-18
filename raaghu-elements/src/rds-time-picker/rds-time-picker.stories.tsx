@@ -1,6 +1,6 @@
 import React from 'react';
         import { Story, Meta } from '@storybook/react';
-        import TimePicker from './time-picker';
+        import TimePicker from './rds-time-picker';
 
         export default {
         title: 'Elements/Time Picker',

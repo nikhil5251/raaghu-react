@@ -775,13 +775,13 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                         <RdsBadge
                                           colorVariant={
                                             tableDataRow[tableHeader.key]
-                                              .badgeColorVariant
+                                              ?.badgeColorVariant
                                               ? tableDataRow[tableHeader.key]
                                                 .badgeColorVariant
                                               : "success"
                                           }
                                           label={
-                                            tableDataRow[tableHeader.key].content
+                                            tableDataRow[tableHeader.key]?.content
                                               ? tableDataRow[tableHeader.key]
                                                 .content
                                               : tableDataRow[tableHeader.key]
