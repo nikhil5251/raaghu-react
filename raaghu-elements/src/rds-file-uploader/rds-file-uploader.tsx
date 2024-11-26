@@ -28,17 +28,40 @@ export interface RdsFileUploaderProps {
   hintText?: string;
   multiple?: boolean;
   profilePic?: string;
-  iconName?: string;
+    iconName?: string;
+    hintPosition?: "right" | "left";
+    fileUrl?: string;
+    onChangeFileUpload?: (data: any) => void;
 }
 
 const RdsFileUploader = (props: RdsFileUploaderProps) => {
+    const [selectedFileName, setSelectedFileName] = useState<string | null>("No file chosen");
+    const [previewSrc, setPreviewSrc] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [validation, setValidation] = useState(props.validation || []);
   const [avatarImage, setAvatarImage] = useState<string | ArrayBuffer | null>(props.profilePic || null); // State to store the uploaded image
   const { t } = useTranslation();
-  const fileInputRef = useRef<HTMLInputElement>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [fileArray, setFileArray] = useState<File[]>([]);
+    const [fileName, setFileName] = useState<string[]>([]);
+    const [fileSize, setFileSize] = useState<number[]>([]);
 
   const withIcon = props.iconName ? true : false;
+
+    useEffect(() => {
+        if (props.selectedFile) {
+            setSelectedFileName(props.selectedFile.name);
+            setPreviewSrc(URL.createObjectURL(props.selectedFile));
+            setFileArray([props.selectedFile]);
+            setFileName([props.selectedFile.name]);
+            setFileSize([props.selectedFile.size]);
+        } else if (props.fileUrl) {
+            setPreviewSrc(props.fileUrl);
+            setSelectedFileName("Uploaded File");
+        } else {
+            setSelectedFileName("No file chosen");
+        }
+    }, [props.selectedFile, props.fileUrl]);
 
   const size =
     props.size === "small"
@@ -49,6 +72,25 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
 
       const onchangehandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(event.target.files || []);
+
+        if (files && files.length > 0) {
+          const selectedFiles = Array.from(files);              
+
+            setFileArray(selectedFiles);
+            setFileName(selectedFiles.map(file => file.name));
+            setFileSize(selectedFiles.map(file => file.size));
+
+          if (!props.multiple) {
+              setSelectedFileName(selectedFiles[0].name);                  
+              if (props.onChangeFileUpload) {
+                  props.onChangeFileUpload(selectedFiles[0]);
+              }
+          }
+      } else {
+          setSelectedFiles([]);
+      
+      }
+
         const allowedExtensions = props.extensions.split(", ");
         const newFiles: File[] = [];
         const newValidation: { isError: boolean; hint: string }[] = [];
@@ -250,7 +292,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             </div>
           </label>
           {props.showHint && (
-            <div className="d-flex justify-content-start text-muted mt-1">
+                  <div className={`d-flex justify-content-start text-muted mt-1`} >
               <small>{props.hintText}</small>
             </div>
           )}
@@ -367,7 +409,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             </div>
           </label>
           {props.showHint && (
-            <div className="d-flex justify-content-start text-muted mt-1">
+                  <div className={`d-flex text-muted mt-1 hint-${props.hintPosition}`}>
               <small>{props.hintText}</small>
             </div>
           )}
@@ -380,12 +422,12 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             >
               <div className="d-flex gap-2 align-items-center">
                 <span>
-                  {props.showThumbnail && file.type.startsWith("image/") ? (
+                          {props.showThumbnail && previewSrc && file.type.startsWith("image/") ? (
                     <img
-                      src={URL.createObjectURL(file)}
+                      src={previewSrc}
                       alt={file.name}
-                      height="120px"
-                      width="120px"
+                      height="40px"
+                      width="40px"
                       className="file-thumbnail"
                     />
                   ) : (
@@ -499,7 +541,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             </div>
           </label>
           {props.showHint && (
-            <div className="d-flex justify-content-start text-muted mt-1">
+                  <div className={`d-flex justify-content-start text-muted mt-1 ${props.hintPosition}`}>
               <small>{props.hintText}</small>
             </div>
           )}

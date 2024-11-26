@@ -5,6 +5,7 @@ import { Meta, StoryObj } from "@storybook/react";
 const meta: Meta = {
     title: 'Elements/File Uploader',
     component: RdsFileUploader,
+    hintPosition: "left",
     parameters: {
         layout: 'padded',
     },
@@ -49,6 +50,7 @@ export const Default: Story = {
         showHint: true,
         hintText: "File size should be less than given file size limit",
         
+        
     }
 } satisfies Story;
 Default.parameters = { controls: { include: ['extensions', 'fileSizeLimitInMb', 'title', 'isRequired', 'showTitle', 'showHint', 'hintText'] } };
@@ -88,9 +90,10 @@ export const Drop_Area_Side_Icon
         showTitle: true,
         showHint: true,
         hintText: "File size should be less than given file size limit",
+        hintPosition: "left"
     }
 } satisfies Story;
-Drop_Area_Side_Icon.parameters = { controls: { include: ['multiple','showThumbnail', 'extensions', 'fileSizeLimitInMb', 'title', 'isRequired', 'showTitle', 'showHint', 'hintText'] } };
+Drop_Area_Side_Icon.parameters = { controls: { include: ['multiple','showThumbnail', 'extensions', 'fileSizeLimitInMb', 'title', 'isRequired', 'showTitle', 'showHint', 'hintText','hintPosition'] } };
 
 export const Drop_Area_With_Upload_Button
 : Story = {
