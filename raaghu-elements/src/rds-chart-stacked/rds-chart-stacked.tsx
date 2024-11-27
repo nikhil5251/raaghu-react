@@ -7,7 +7,6 @@ export interface RdsStackedprops {
     options: any,
     dataSets: any[],
     height?: number,
-    width?: number,
     id: string
 }
 
@@ -34,7 +33,6 @@ const RdsStackedChart = (props: RdsStackedprops) => {
             },
         });
         StackedCanvas.canvas.style.height = props.height + "px";
-        StackedCanvas.canvas.style.width = props.width + "px";
     });
 
     return (

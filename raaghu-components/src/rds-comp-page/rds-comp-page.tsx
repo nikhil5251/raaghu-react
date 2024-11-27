@@ -41,7 +41,19 @@ const RdsCompPage = (props: RdsCompPageProps) => {
             style: ""
         });
         }
-
+        const isTitleValid = (title: any) => {
+            if (!title || title.length === 0) {
+                return false;
+            }
+            return true;
+        }
+        const isSlugValid = (slug: any) => {
+            if (!slug || slug.length === 0) {
+                return false;
+            }
+            return true;
+        }
+const isFormValid=isTitleValid(data?.title) && isSlugValid(data?.slug) ;
     return (
         <>
             <div className="custom-content-scroll">
@@ -83,6 +95,7 @@ const RdsCompPage = (props: RdsCompPageProps) => {
                         activeNavtabOrder={handleractiveNavtabOrder}
                         activeNavTabId={"content"}
                         fill={false}
+                        style="Bottom Select"
                         navtabsItems={[
                             {
                                 label: "Content",
@@ -147,7 +160,7 @@ const RdsCompPage = (props: RdsCompPageProps) => {
                 </div>
             </div>
 
-            <div className="footer-buttons pb-3 d-flex ps-4 flex-column-reverse flex-lg-row flex-md-column-reverse flex-xl-row flex-xxl-row flex-row gap-2">
+            <div className="footer-buttons pb-3 d-flex ps-4 flex-column-reverse flex-lg-row flex-md-column-reverse flex-xl-row flex-xxl-row flex-row gap-2 p-4">
                 <RdsButton
                     label="Cancel"
                     databsdismiss="offcanvas"
@@ -164,7 +177,7 @@ const RdsCompPage = (props: RdsCompPageProps) => {
                     type={"button"}
                     size="small"
                     databsdismiss="offcanvas"
-                    isDisabled={!data}
+                    isDisabled={!isFormValid}
                     colorVariant="primary"
                     class="me-2"
                     onClick={(e: any) => emitSaveData(e)}

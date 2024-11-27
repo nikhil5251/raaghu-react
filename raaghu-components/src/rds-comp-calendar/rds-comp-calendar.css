@@ -3,5 +3,24 @@
 }
 
 .rbc-toolbar {
-    font-size: 14px;
+    font-size: 13px;
 }
+
+.rbc-toolbar .rbc-toolbar-label {
+    padding: 5px 10px !important;
+}
+
+@media (max-width: 767px) {
+    .rbc-toolbar {
+        font-size: 12px !important;
+    }
+
+    .rbc-time-view{
+        width: 438px !important;
+    }
+    
+    .rbc-row .rbc-time-header-cell{
+        width: 362px !important;
+    }
+}
+

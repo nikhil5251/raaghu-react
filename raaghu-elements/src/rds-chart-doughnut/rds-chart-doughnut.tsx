@@ -6,8 +6,6 @@ export interface RdsDoughnutprops {
     options: any;
     dataSets: any[];
     id: string;
-    height?: number;
-    width?: number;
     titleText?: string;
     subTitleText?: string;
 }
@@ -56,16 +54,11 @@ const RdsDoughnutChart = (props: RdsDoughnutprops) => {
                 options: props.options,
             });
 
-            if (doughnutCanvas !== null) {
-                doughnutCanvas.canvas.style.width = props.width + "px";
-                doughnutCanvas.canvas.style.height = props.height + "px";
-            }
-
             return () => {
                 doughnutCanvas.destroy();
             };
         }
-    }, []);
+    }, [props]);
 
     return (
         <div>

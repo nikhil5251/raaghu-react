@@ -38,7 +38,31 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
             logoUri: "",
         });
     };
-
+    const isClientIdValid = (clientId: any) => {
+        if (!clientId || clientId.length === 0) {
+            return false;
+        }
+        return true;
+    };
+    const isDisplayNameValid = (displayName: any) => {
+        if (!displayName || displayName.length === 0) {
+            return false;
+        }
+        return true;
+    };
+    const isClientUriValid = (clientUri: any) => {
+        if (!clientUri || clientUri.length === 0|| !/^(ftp|http|https):\/\/[^ "]+$/.test(clientUri)) {
+            return false;
+        }
+        return true;
+    };
+    const isLogoUriValid = (logoUri: any) => {
+        if (!logoUri || logoUri.length === 0|| !/^(ftp|http|https):\/\/[^ "]+$/.test(logoUri)) {
+            return false;
+        }
+        return true;
+    };
+    const isFormValid = isClientIdValid(basicApplicationData?.clientId) && isDisplayNameValid(basicApplicationData?.displayName) && isClientUriValid(basicApplicationData?.clientUri) && isLogoUriValid(basicApplicationData?.logoUri);
     return (
         <> <div>
             <div className="tab-content pt-3">
@@ -97,7 +121,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3">
+                    <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3 p-4">
                         <RdsButton
                             tooltipTitle={""}
                             type={"button"}
@@ -115,6 +139,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
                             type={"submit"}
                             databsdismiss="offcanvas"
                             dataTestId="save"
+                            isDisabled={!isFormValid}
                         ></RdsButton>
                     </div>
                 </form>

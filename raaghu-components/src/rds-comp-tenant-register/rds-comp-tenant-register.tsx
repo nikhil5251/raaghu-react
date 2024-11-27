@@ -152,7 +152,7 @@ const RdsCompTenantRegister = (props: RdsCompTenantRegisterProps) => {
                         </div>
 
                         <div className="row text-start">
-                            <div className="col-md-6">
+                            <div className="col-md-6 mt-2">
                                 <RdsLabel label="Country" required={true} />
                                 <RdsDropdownList
                                     key={countryList.length}
@@ -164,7 +164,7 @@ const RdsCompTenantRegister = (props: RdsCompTenantRegisterProps) => {
                                     onClick={(e: any, val: any) => handleRegisterDataChanges(val, "countryCode")}
                                 />
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 mt-2">
                                 <RdsInput
                                     required={true}
                                     label="Zip Code"
@@ -177,7 +177,7 @@ const RdsCompTenantRegister = (props: RdsCompTenantRegisterProps) => {
                             </div>
                         </div>
 
-                        <div className="pb-4">
+                        <div className="pb-4 mt-2 pt-2">
                             <RdsCheckbox
                                 id="id1"
                                 label="I Accept Terms Of Service"

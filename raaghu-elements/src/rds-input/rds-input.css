@@ -15,6 +15,23 @@
   display: block;
   /* Ensure label takes full width */
 }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  /* Change to column layout for label and input */
+  /* Align items to the start */
+  gap: 0.5rem;
+  /* Space between label and input */
+}
+
+.form-label {
+  margin-bottom: 0.25rem;
+  /* Add a little space below the label */
+  white-space: nowrap;
+  /* Prevent wrapping if needed */
+  display: block;
+  /* Ensure label takes full width */
+}
 
 .form-control {
   flex-grow: 1;
@@ -98,8 +115,6 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1rem;
   /* Match font size */
 }
-
-/* Hover effect for the button */
 .btn-toggle-password:hover {
   color: #0056b3;
   /* Darker color on hover */

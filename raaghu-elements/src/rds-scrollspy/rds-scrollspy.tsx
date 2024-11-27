@@ -33,12 +33,12 @@ const RdsScrollspy = (props: RdsScrollspyProps) => {
       <div>
         {props.data.map((item) => (
           <div id={`scrollspyHeading${item.id}`} className="scrossSpyItem" key={item.id}>
-            <div>
+            <div id="scrollspy">
               <h4 className="contentHeader">{item.header}</h4>
               <p className="contentParagraph">{item.content}</p>
             </div>
-            <div className="d-flex justify-content-end align-items-end">
-              <a href="#scrollspy" target="_self" className="text-decoration-none">
+            <div className="d-flex justify-content-end align-items-end ">
+              <a href="#scrollspy" target="_self" className="text-decoration-none text-primary">
                 Go Top
               </a>
             </div>

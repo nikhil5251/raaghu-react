@@ -61,8 +61,32 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
       return false;
     } else return true;
   };
+  const ifFullNameValid = (fullName: any) => {
+    if (!fullName || fullName.length === 0) {
+        return false;
+    }
+    return true;
+}
+const isContactNumberValid = (contactNumber: any) => {
+    if (!contactNumber || contactNumber.length === 0) {
+        return false;
+    }
+    return true;
+}
+const isPositionValid = (position: any) => {
+    if (!position || position.length === 0) {
+        return false;
+    }
+    return true;
+}
+const isPeriodValid = (period: any) => {
+    if (!period || period.length === 0) {
+        return false;
+    }
+    return true;
+}
 
-  const isFormValid = isEmailValid(formData?.email);
+  const isFormValid = isEmailValid(formData?.email) && ifFullNameValid(formData?.fullName) && isContactNumberValid(formData?.contactNumber) && isPositionValid(formData?.position) && isPeriodValid(formData?.period) ;
 
   const { t } = useTranslation();
   return (
@@ -171,14 +195,15 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
                   dataTestId="notice-period"
                 ></RdsInput>
               </div>
-              <div>
+              <div className="mt-1">
                 <RdsFileUploader
                   key={fileUploaderKey}
                   label="Upload Resume"
                   colorVariant="primary"
                   extensions="png, jpg, doc, pdf, ppt"
-                  limit={5}
-                  multiple
+                  fileSizeLimitInMb={5}
+                  Drop_Area_Side_Icon
+                  multiple={true}
                   size="large"
                   validation={[
                     {
@@ -193,11 +218,11 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
               </div>
             </div>
 
-            <div className="col-md-6 col-sm-12 mt-2">
+            <div className="col-md-6 col-sm-12">
               <RdsTextArea
                 label="Cover Letter"
                 placeholder="Cover Letter.."
-                rows={8}
+                rows={5}
                 onChange={(e) => {
                   handleDataChanges(e.target.value, "coverLetter");
                 }}

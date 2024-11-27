@@ -1,8 +1,7 @@
 import React from "react";
 import RdsProgressBar from "./rds-progress-bar";
-import { button_colors } from "../../libs/types/colorvariant";
+import { progress_colors } from "../../libs/types/colorvariant";
 import { Meta, StoryObj } from "@storybook/react";
-
 
 const meta: Meta = {
     title: 'Elements/ProgressBar',
@@ -13,9 +12,14 @@ const meta: Meta = {
     tags: ['autodocs'],
     argTypes: {
         colorVariant: {
-            options: button_colors,
+            options: progress_colors,
             control: { type: "select" },
             if: { arg: 'colorVariant' }
+        },
+        State: {
+            options: ['success', 'error'],
+            control: { type: "select" },
+            if: { arg: 'State' }
         }
     },
 } satisfies Meta<typeof RdsProgressBar>;
@@ -32,7 +36,7 @@ export const Default: Story = {
         striped: true,
         progressWidth: 40,
         animation: false,
-        height: 15,
+        height: 4,
         displayLabel: true,
         displayPercentage: true
     }
@@ -66,4 +70,34 @@ export const MultiProgressBar: Story = {
     }
 } satisfies Story;
 MultiProgressBar.parameters = { controls: { include: ['role', 'height', 'progressValues'] } };
+
+
+export const Circular: Story = {
+    args: {
+        role: "Circular",
+        State: "success", 
+        progressWidth: 40,
+        height: 80,
+        displayPercentage: true
+    },
+    argTypes: {
+        height: {
+            control: {
+                type: 'number',
+                min: 80,
+                max: 300,
+            },
+            table: {
+                defaultValue: { summary: "80" },
+            }
+        }
+    }
+} satisfies Story;
+
+Circular.parameters = { 
+    controls: { 
+        include: ['role', 'State', 'progressWidth', 'height', 'displayPercentage'] 
+    } 
+};
+
 

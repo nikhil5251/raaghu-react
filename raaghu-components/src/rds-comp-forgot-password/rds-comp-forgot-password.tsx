@@ -47,14 +47,16 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 
     const handleDataChanges = (value: any, key: string) => {
         setRegisterData({ ...registerData, [key]: value });
-        if (value.trim() === "") {
-            setErrorMessageForEmail("");
-        }
-        else if (!isEmailValid(value)) {
-            setErrorMessageForEmail("Please Enter Valid Email Address.");
-        } 
-        else {
-            setErrorMessageForEmail("");
+    
+        if (key === "email") {
+            const trimmedValue = value.trim();
+            if (trimmedValue === "") {
+                setErrorMessageForEmail("Email is required.");
+            } else if (!isEmailValid(trimmedValue)) {
+                setErrorMessageForEmail("Please enter a valid email address.");
+            } else {
+                setErrorMessageForEmail("");
+            }
         }
     };
 
@@ -72,6 +74,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
         });
         setShowMailSuccess(true);
     }
+    const isFormValid = isEmailValid(registerData?.email);
     return (
         <div>
             <div className="text-center">
@@ -136,6 +139,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
                                         showLoadingSpinner={true}
                                         type={"submit"}
                                         dataTestId="submit"
+                                        isDisabled={!isFormValid}
                                     ></RdsButton>
 
                                 </div>

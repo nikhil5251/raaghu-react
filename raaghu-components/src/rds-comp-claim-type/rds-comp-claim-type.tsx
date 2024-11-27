@@ -1,7 +1,6 @@
 import { RdsCheckbox, RdsSelectList } from "../rds-elements";
 import React, { useState, useEffect } from "react";
 import { RdsInput, RdsTextArea, RdsButton } from "../rds-elements";
-import { useTranslation } from "react-i18next";
 export interface RdsCompClaimTypeProps {
    
     claimsData?: any;
@@ -12,40 +11,57 @@ export interface RdsCompClaimTypeProps {
 }
 
 const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
-    const [formData, setFormData] = useState(props.claimsData);
+    const [formData, setFormData] = useState({
+        name: "",
+        regex: "",
+        valueType: "",
+        regexDescription: "",
+        description: "",
+        required: false,
+        ...props.claimsData
+    });
     const [isFormValid, setIsFormValid] = useState(false);
     const [inputReset, setInputReset] = useState(props.reset);
-
+    
     useEffect(() => {
         setInputReset(props.reset);
     }, [props.reset]);
 
-    const handleSelectChange = (value: any, key: string) => {
+    useEffect(() => {
+        checkFormValidity(formData);
+    }, [formData]);
+
+    const handleSelectChange = (value: any, key: string) => {        
         setFormData({ ...formData, [key]: value });
-        checkFormValidity({ ...formData, [key]: value });
     };
 
     const checkFormValidity = (formData: any) => {
-        const requiredFields = ["name"];
-        const isFormValid = requiredFields.every((field) => formData[field] !== "");
-        setIsFormValid(isFormValid);
+        const requiredFields = ["name", "regex", "valueType", "regexDescription"];
+        const isValid = requiredFields.every((field) => formData[field] && formData[field].toString().trim() !== "");
+        setIsFormValid(isValid);
     };
-    function emitSaveData(event: any) {
+
+    const emitSaveData = (event: any) => {
         event.preventDefault();
-        props.onSaveHandler && props.onSaveHandler(formData);
-        setInputReset(!inputReset);
-        setFormData({
-            valueType: null,
-            name: "",
-            regex: "",
-            regexDescription: "",
-            description: "",
-            required: false
-        });
-    }
+        if (isFormValid) {
+            props.onSaveHandler && props.onSaveHandler(formData);
+
+            setFormData({
+                name: "",
+                regex: "",
+                valueType: "",
+                regexDescription: "",
+                description: "",
+                required: false
+            });
+            setInputReset(!inputReset);
+        }
+        console.log("after clearing formData", formData);
+    };
+
     return (
         <>
-         <div className="custom-content-scroll">
+            <div className="custom-content-scroll">
                 <div className="row">
                     <div className="col-md-12">
                         <RdsInput
@@ -59,7 +75,7 @@ const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
                             reset={inputReset}
                         />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6  pt-2">
                         {" "}
                         <RdsInput
                             label="Regex"
@@ -72,19 +88,21 @@ const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
                             reset={inputReset}
                         />
                     </div>
-                    <div className="col-md-6 mb-md-0 mb-3">
+                    <div className="col-md-6 mb-md-0 mb-3 pt-2 ">
                         <RdsSelectList
                             id="idenval"
                             label="Value Type"
                             placeholder="Select Value Type"
-                            selectItems={props.valueType}
-                            selectedValue={
-                                formData?.valueType }
-                           onChange= {(e: any) =>{handleSelectChange(e, "valueType");}}
-                          required={true}
+                            selectItems= {props.valueType}
+                            selectedValue={formData?.valueType}
+                            onChange= {(item: any) =>{handleSelectChange(item.value, "valueType");}}
+                            dataTestId="value-type"
+                            required={true}
+                            key={`valueType-${formData?.valueType}`}
                         ></RdsSelectList>
+
                     </div>
-                    <div className="col-md-12">
+                    <div className="col-md-12 pt-2">
                         <RdsInput
                             label="Regex Description"
                             value={formData?.regexDescription}
@@ -96,7 +114,7 @@ const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
                             reset={inputReset}
                         />
                     </div>
-                    <div className="col-md-12 mb-3">
+                    <div className="col-md-12 mb-3 pt-2">
                         <RdsTextArea
                             label="Description"
                             placeholder="Enter Description"
@@ -108,7 +126,7 @@ const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
                         />
                     </div>
 
-                    <div className="col-md-12">
+                    <div className="col-md-12 pb-3">
                         <RdsCheckbox
                             label="Required"
                             onChange= {(e) =>{handleSelectChange(e.target.checked , "required");}}
@@ -117,30 +135,29 @@ const RdsCompClaimType = (props: RdsCompClaimTypeProps) => {
                         ></RdsCheckbox>
                     </div>
                 </div>
-                </div>
-                <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3">
-                    <RdsButton
-                        label="Cancel"
-                        databsdismiss="offcanvas"
-                        type={"button"}
-                        size="small"
-                        isOutline={true}
-                        colorVariant="primary"
-                        dataTestId="cancel"
-                        onClick={props.onCancel}
-                    ></RdsButton>
-                    <RdsButton
-                        label="Save"
-                        type={"button"}
-                        size="small"
-                        databsdismiss="offcanvas"
-                        isDisabled={!isFormValid}
-                        colorVariant="primary"
-                        onClick={(e: any) => emitSaveData(e)}
-                        dataTestId="save"
-                    ></RdsButton>
-                </div>
-            
+            </div>
+            <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3 p-4">
+                <RdsButton
+                    label="Cancel"
+                    databsdismiss="offcanvas"
+                    type={"button"}
+                    size="small"
+                    isOutline={true}
+                    colorVariant="primary"
+                    dataTestId="cancel"
+                    onClick={props.onCancel}
+                ></RdsButton>
+                <RdsButton
+                    label="Save"
+                    type={"button"}
+                    size="small"
+                    databsdismiss="offcanvas"
+                    isDisabled={!isFormValid}
+                    colorVariant="primary"
+                    onClick={(e: any) => emitSaveData(e)}
+                    dataTestId="save"
+                ></RdsButton>
+            </div>            
         </>
     );
 };

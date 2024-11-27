@@ -1,18 +1,25 @@
-
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import RdsIcon from "../rds-icon";
 import "./rds-datepicker.css";
+import RdsButton from "../rds-button";
 
 export interface RdsDatepickerProps {
-    selectedDate?: any
-    dateForEdit?: any
-    DatePickerLabel?: string;
+    selectedDate?: any;
+    dateForEdit?: any;
+    title?: string;
+    showTitle?: boolean;
     onDatePicker?: any;
+    datepickerStyle?: "Dropdown" | "Selector" ;
     type?: "default" | "advanced" | "withTime";
+    layout?: "default" | "MonthPicker" | "YearPicker" | "MultiMonth";
     customDate?: any;
     isDropdownOpen: boolean;
+    isDisabled?: boolean;
+    isMandatory?: boolean;
+    placeholderText?: string;
+    DatePickerLabel?: string;
 }
 const RdsDatepicker = (props: RdsDatepickerProps) => {
     const today = new Date();
@@ -20,11 +27,11 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         today.toDateString().slice(4)
     );
     const [activeList, setActiveList] = useState("custom");
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const onRangeChange = (dates: [any, any]) => {
+    const onRangeChange = (dates: [Date | null, Date | null]) => {
         if (props.customDate && typeof props.customDate === 'function') {
             props.customDate(dates);
         }
@@ -32,8 +39,8 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         setStartDate(start);
         setEndDate(end);
         setDropdownDisplayValue(
-            start.toDateString().slice(4) +
-            (end != null ? " - " + end.toDateString().slice(4) : "")
+            start ? start.toDateString().slice(4) +
+            (end ? " - " + end.toDateString().slice(4) : "") : ""
         );
         setIsDropdownOpen(false);
         if (typeof props.onDatePicker === 'function') {
@@ -41,9 +48,8 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         }
     };
 
-    const handlerDateChange = (date: any) => {
-        if (date != null) { setStartDate(date); }
-        else { setStartDate(new Date()); }
+    const handlerDateChange = (date: Date | null) => {
+        setStartDate(date);
         props.selectedDate && props.selectedDate(date);
         props.onDatePicker && props.onDatePicker(startDate);
     };
@@ -65,6 +71,13 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+
+    const CustomButtons = forwardRef(({ value, onClick }: any, ref: any) => (
+        <div className="d-flex text-align-center justify-content-end gap-2 me-2">
+            <RdsButton label="Cancel" size="small" colorVariant="outline-primary" />
+            <RdsButton label="Apply" size="small" colorVariant="primary" />
+        </div>
+    ));
 
     const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
         <li
@@ -149,9 +162,13 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
 
     return (
         <>
+            {props.showTitle && props.title && (
+                <label className="form-label">
+                    {props.title}
+                    {props.isMandatory && <span className="text-danger"> *</span>}
+                </label>
+            )}
             {props.type === "default" && (
-                <>
-                    {props.DatePickerLabel && <label className="form-label">{props.DatePickerLabel}</label>}
                     <div className="input-group input-group-datePicker mb-3 mt-1">
                         {/* <div className="input-group-append datepicker__icon-box">
                             <span className="input-group-text cursor-pointer" id="basic-addon2">
@@ -166,26 +183,34 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                         </div> */}
 
                         <DatePicker
-                            selected={startDate}
+                            selected={startDate || null}
                             onChange={handlerDateChange}
-                            className="form-control rounded-end-0"
+                            className={`form-control rounded-end-0 ${props.isDisabled ? 'date-picker-disable' : ''}`}
                             wrapperClassName="datepicker__wrapper"
+                            disabled={props.isDisabled} 
+                            placeholderText={props.placeholderText || "Select date"}
+                            showMonthYearPicker={props.layout === "MonthPicker"}
+                            showYearPicker={props.layout === "YearPicker"}
+                            showPreviousMonths
+                            monthsShown={props.layout === "MultiMonth" ? 3 : 1}
+                            scrollableMonthYearDropdown={props.datepickerStyle === "Dropdown"}
+                            todayButton={<CustomButtons />}
+                            peekNextMonth={true}
+                            showMonthDropdown={props.datepickerStyle === "Dropdown"}
+                            showYearDropdown={props.datepickerStyle === "Dropdown"}
+                            dropdownMode="select"
                         />
                         <span className="input-group-text cursor-pointer" id="basic-addon2">
                             <RdsIcon
                                 name="calendar"
                                 width="20px"
                                 height="20px"
-
                                 stroke={true}
                             ></RdsIcon>
                         </span>
                     </div>
-                </>
             )}
             {props.type === "advanced" && (
-                <>
-                    {props.DatePickerLabel && <label className="form-label">{props.DatePickerLabel}</label>}
                     <div className="dropdown border rounded justify-content-between text-start d-block datepicker mt-1">
                         <button
                             className="bg-transparent border-0 d-flex py-18 ps-2 w-100 justify-content-between"
@@ -203,7 +228,6 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                     colorVariant="secondary"
                                     stroke={true}
                                 ></RdsIcon>
-                                {/* (StartDate:any,EndDate:any)=>props.DatePicker */}
                                 <span className="ps-2 mt-1 datePicker-text">{dropdownDisplayValue}</span>
                             </span>
 
@@ -251,48 +275,61 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                 Last 14 days
                             </li>
                             <DatePicker
-                                selected={startDate}
+                                selected={startDate || null}
                                 onChange={onRangeChange}
                                 startDate={startDate}
                                 endDate={endDate}
                                 selectsRange
                                 popperPlacement="right"
                                 customInput={<ExampleCustomInput />}
+                                disabled={props.isDisabled}
+                                placeholderText={props.placeholderText || "Select date"}
+                                showMonthYearPicker={props.layout === "MonthPicker"}
+                                showYearPicker={props.layout === "YearPicker"}
+                                todayButton={<CustomButtons />}
+                                peekNextMonth={true}
+                                showMonthDropdown={props.datepickerStyle === "Dropdown"}
+                                showYearDropdown={props.datepickerStyle === "Dropdown"}
+                                dropdownMode="select"
+                                showPreviousMonths
+                                monthsShown={props.layout === "MultiMonth" ? 3 : 1}
                             />
                         </ul>
                     </div>
-                </>
-            )}
-            {props.type === "withTime" && (
-                <>
-                    {props.DatePickerLabel && (
-                        <label className="form-label">{props.DatePickerLabel}</label>
-                    )}
+      )}
+      {props.type === "withTime" && (
                     <div className="input-group input-group-datePicker mb-3 mt-1">
                         <DatePicker
-                            selected={startDate}
+                            selected={startDate || null}
                             onChange={handlerDateTimeChange}
                             className="form-control rounded-end-0"
                             wrapperClassName="datepicker__wrapper"
                             timeInputLabel="Time:"
                             dateFormat="MM/dd/yyyy h:mm aa"
                             showTimeInput
+                            disabled={props.isDisabled}
+                            placeholderText={props.placeholderText || "Select date"}
+                            showMonthYearPicker={props.layout === "MonthPicker"}
+                            showYearPicker={props.layout === "YearPicker"}
+                            peekNextMonth={true}
+                            showMonthDropdown={props.datepickerStyle === "Dropdown"}
+                            showYearDropdown={props.datepickerStyle === "Dropdown"}
+                            dropdownMode="select"
+                            showPreviousMonths
+                            monthsShown={props.layout === "MultiMonth" ? 3 : 1}
+                            todayButton={<CustomButtons />}
                         />
-                        <span className="input-group-text cursor-pointer" id="basic-addon2">
+                        <span className="input-group-text cursor-pointer" id="basic-addon2" >
                             <RdsIcon
                                 name="calendar"
                                 width="20px"
                                 height="20px"
-
                                 stroke={true}
                             ></RdsIcon>
                         </span>
                     </div>
-                </>
             )}
         </>
     );
 };
 export default RdsDatepicker;
-
-

@@ -72,7 +72,25 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
         useState(false);
     const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] =
         useState(false);
-
+        const isConnectionStringValid = (dcstring: string) => {
+            if (!dcstring || dcstring.length === 0) {
+                return false;
+            }
+            return true;
+        }
+        const isPasswordValid = (password: string) => {
+            if (!password || password.length === 0 || errors.password) {
+                return false;
+            }
+            return true;
+        }
+        const isConfirmPasswordValid = (cpassword: string) => {
+            if (!cpassword || cpassword.length === 0 || errors.cpassword) {
+                return false;
+            }
+            return true;
+        }
+const isFormValid=isConnectionStringValid(formData?.dcstring) && isPasswordValid(formData?.password) && isConfirmPasswordValid(formData?.cpassword);
     return (
         <div>
             <div className="tab-content py-4">
@@ -217,7 +235,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                         </div>
                     </div>
                     </div>
-                    <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3">
+                    <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3 p-4">
                         <RdsButton
                             tooltipTitle={""}
                             type={"button"}
@@ -238,6 +256,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                             databsdismiss="offcanvas"
                             dataTestId="save"
                             onClick={(e: any) => emitSaveData(e)}
+                            isDisabled={!isFormValid}
                         ></RdsButton>
                     </div>
                 </form>

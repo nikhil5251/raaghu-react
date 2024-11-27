@@ -39,7 +39,55 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
       postalCode: ""
   });
   }
-
+  const isNameValid = (name: any) => {
+    if (!name || name.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isLastNameValid = (lastName: any) => {
+    if (!lastName || lastName.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isCompanyValid = (company: any) => {
+    if (!company || company.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isAddressValid = (address: any) => {
+    if (!address || address.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isCityValid = (city: any) => {
+    if (!city || city.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isStateValid = (state: any) => {
+    if (!state || state.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isPostalCodeValid = (postalCode: any) => {
+    if (!postalCode || postalCode.length === 0) {
+        return false;
+    }
+    return true;
+  }
+  const isPhoneValid = (phone: any) => {
+    if (!phone || phone.length === 0) {
+        return false;
+    }
+    return true;
+  }
+   const isFormValid=isNameValid(formData?.firstName) && isLastNameValid(formData?.lastName) && isCompanyValid(formData?.company)&& isPhoneValid(formData?.phone) && isNameValid(formData?.phone) && isAddressValid(formData?.address) && isCityValid(formData?.city) && isStateValid(formData?.state) && isPostalCodeValid(formData?.postalCode);
  
   return (
       <>
@@ -210,7 +258,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
                 ></RdsInput>
               </div>
             </div>
-            <div className="col-md-6 sm-p-0">
+            <div className="col-md-6 sm-p-0 pb-3">
               <div className="form-group">
                 <RdsInput
                   label="Postal Code"
@@ -229,7 +277,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3">
+        <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3 p-4">
           <RdsButton
             type="button"
             label="Back"
@@ -243,6 +291,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
             isOutline={false}
             colorVariant="primary"
             size="small"
+            isDisabled={!isFormValid}
             onClick={(e: any) => emitSaveData(e)}
           ></RdsButton>
         </div>

@@ -5,7 +5,6 @@ import {
     RdsInput,
     RdsButton
 } from "../rds-elements";
-import { useTranslation } from "react-i18next";
 
 export interface RdsCompLanguageProps {
     cultureList: { option: any, value: any }[];
@@ -111,6 +110,7 @@ const RdsCompLanguage = (props: RdsCompLanguageProps) => {
                                         selectedValue={cultureName}
                                         onChange={(item: any) => onChangeSelectList("cultureName", item.value)}
                                         required={true}
+                                        key={`cultureName-${cultureName}`}
                                     ></RdsSelectList>
                                 </div>
                             </div>
@@ -121,17 +121,18 @@ const RdsCompLanguage = (props: RdsCompLanguageProps) => {
                                 <div className="form-group">
                                     <RdsSelectList
                                         id="langU"
-                                        label="Ui Culture Name"
+                                        label="UI Culture Name"
                                         selectItems={props.cultureList}
                                         selectedValue={cultureUIName}
                                         onChange={(item: any) => onChangeSelectList("cultureUIName", item.value)}
                                         required={true}
+                                        key={`cultureUIName-${cultureUIName}`}
                                     ></RdsSelectList>
                                 </div>
                             </div>
                         )}
 
-                        <div className="col-md-6">
+                        <div className="col-md-6 pt-2">
                             <div className="form-group">
                                 <RdsInput
                                     size="medium"
@@ -143,13 +144,15 @@ const RdsCompLanguage = (props: RdsCompLanguageProps) => {
                                     reset={inputReset}
                                 ></RdsInput>
                             </div>
-                            <RdsCheckbox
-                                label={("Is Enabled") || ""}
-                                checked={isEnabled}
-                                onChange={checkboxHandler}
-                            ></RdsCheckbox>
+                            <div className="form-group pt-3"> 
+                                <RdsCheckbox
+                                    label="Is Enabled"
+                                    checked={isEnabled}
+                                    onChange={checkboxHandler}
+                                ></RdsCheckbox>
+                            </div>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 pt-2">
                             <div className="form-group">
                                 <div className="form-group">
                                     <RdsSelectList
@@ -158,13 +161,14 @@ const RdsCompLanguage = (props: RdsCompLanguageProps) => {
                                         selectItems={props.flagIconList}
                                         onChange={(item: any) => onChangeSelectList("flagIcon", item.value)}
                                         selectedValue={flagIcon}
+                                        key={`flagIcon-${flagIcon}`}
                                     ></RdsSelectList>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3">
+                <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3 p-4">
                     <RdsButton
                         label="Cancel"
                         type="button"

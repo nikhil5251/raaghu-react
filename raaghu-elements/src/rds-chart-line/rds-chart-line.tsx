@@ -5,9 +5,7 @@ import "./rds-chart-line.css";
 export interface Rdslineprops {
     labels: any[];
     options: any;
-    dataSets: any[];
-    height?: number;
-    width?: number;
+    dataSets: any[];    
     id: string;
 }
 
@@ -27,14 +25,12 @@ const RdsLineChart = (props: Rdslineprops) => {
                 },
                 options: props.options,
             });
-            lineCanvas.canvas.style.height = props.height + "px";
-            lineCanvas.canvas.style.width = props.width + "px";
-
+            
             return () => {
                 lineCanvas.destroy();
             };
         }
-    }, [props.height, props.width]);
+    }, []);
 
     return (
         <div>

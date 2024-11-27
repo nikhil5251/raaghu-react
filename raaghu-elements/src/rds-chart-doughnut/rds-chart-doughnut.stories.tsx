@@ -17,9 +17,9 @@ type Story = StoryObj<typeof RdsDoughnutChart>;
 
 export const DoughnutChart: Story = {
     args: {
-        height: 400,
         id: "myChart",
-        width: 400,
+        titleText: "35 k",
+        subTitleText: "deioj",
         labels: ["Red", "Orange", "Yellow", "Green", "Blue"],
         options: {
             maintainAspectRatio: false,
@@ -58,17 +58,13 @@ export const DoughnutChart: Story = {
             }
         ],
 
-        titleText: "35 k",
-        subTitleText: "deioj",
+       
     }
 } satisfies Story;
 
 export const advanced: Story = {
     args: {
         id: "doughnutchart",
-
-        height: 200,
-        width: 120,
         labels: ['Total Sales - 85%', 'Revenue - 25%', 'Expenses - 15%'],
         options: {
             animationEnabled: true,

@@ -86,7 +86,27 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
       curNewPass: "",
     });
   };
+  const isProfileNameValid = (ProfileName: any) => {
+    if (!ProfileName || ProfileName.length === 0) {
+      return false;
+    }
+    return true;
+  }
+  const isEmailValid = (email: any) => {
+    if (!email || email.length === 0) {
+      return false;
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      return false;
+    } else return true;
+  }
+  const isUserNameValid = (UserName: any) => {
+    if (!UserName || UserName.length === 0) {
+      return false;
+    }
+    return true;
+  }
 
+const isFormValid = isProfileNameValid(formData?.ProfileName) && isEmailValid(formData?.Email) && isUserNameValid(formData?.UserName) && isCurPassValid(formData?.curPass) && isNewPassValid(formData?.newPass) && isCurNewPassValid(formData?.curNewPass);
   return (
     <div>
       <form>
@@ -182,7 +202,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             {touched.curNewPass && errors.curNewPass && <div className="form-control-feedback"><span className="text-danger">{errors.curNewPass}</span></div>}
           </div>
         </div>
-        <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3">
+        <div className="d-flex flex-column-reverse ps-4 flex-lg-row flex-md-column-reverse flex-row flex-xl-row flex-xxl-row footer-buttons gap-2 mt-3 pb-3 p-4">
           <RdsButton
             size="small"
             isOutline={true}
@@ -197,6 +217,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             colorVariant="primary"
             label="Save"
             type="submit"
+            isDisabled={!isFormValid}
             onClick={(e) => emitSaveData(e)}
           ></RdsButton>
         </div>
