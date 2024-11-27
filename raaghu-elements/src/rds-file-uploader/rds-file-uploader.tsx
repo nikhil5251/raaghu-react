@@ -515,14 +515,10 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                      >
                          <div className="d-flex gap-2 align-items-center">
                              <span>
-                                 {(props.showThumbnail &&
-                                     previewSrc &&
-                                     selectedFiles[i].type.startsWith("image/") &&
-                                     props.extensions.includes("png")) ||
-                                     props.extensions.includes("jpg") ? (
+                             {props.showThumbnail && selectedFiles[i].type.startsWith("image/") ? (
                                      <img
                                      src={previewSrcs[i]}
-                                         alt={file.name}
+                                         alt={filename}
                                          height="40px"
                                          width="40px"
                                          className="file-thumbnail"
