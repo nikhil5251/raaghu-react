@@ -5,7 +5,6 @@ import { Meta, StoryObj } from "@storybook/react";
 const meta: Meta = {
     title: 'Elements/File Uploader',
     component: RdsFileUploader,
-    hintPosition: "left",
     parameters: {
         layout: 'padded',
     },
@@ -49,7 +48,7 @@ export const Default: Story = {
         showTitle: true,
         showHint: true,
         hintText: "File size should be less than given file size limit",
-        
+        preview: true, 
         
     }
 } satisfies Story;
@@ -89,6 +88,7 @@ export const Drop_Area_Side_Icon
         isRequired: true,
         showTitle: true,
         showHint: true,
+        preview: true, 
         hintText: "File size should be less than given file size limit",
         hintPosition: "left"
     }
