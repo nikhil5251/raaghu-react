@@ -2,6 +2,7 @@ import React from "react";
 import "./rds-banner.css";
 import RdsIcon from "../rds-icon";
 import RdsButton from "../rds-button/rds-button";
+import RdsHeader from "../rds-header";
 
 export interface RdsBannerProps {
   bannerText?: string;
@@ -59,9 +60,10 @@ const RdsBanner = (props: RdsBannerProps) => {
     : "../../../stories/assets/raaghubannerimage.png";
   return (
     <>
+    <span id="news-banner">
      {!props.raaghuBanner &&( <div
         className={`alert d-flex align-items-center fade show ${classes}`}
-        role="alert"
+        role="alert" 
       >
         <span className="ps-2 d-flex align-items-center">
           {props.icon && (
@@ -79,17 +81,17 @@ const RdsBanner = (props: RdsBannerProps) => {
         </span>
       </div>
      )}
-      {props.raaghuBanner &&(<div className="challenge-banner"
+      {props.raaghuBanner &&(<div className="challenge-banner p-3 rounded text-light"
       style={{ backgroundImage: `url(${bannerImage})`,
               backgroundRepeat:"no-repeat",
               backgroundSize:"cover" }}>
         <div className="content">
-          <h2 className="heading">{props.headingText}</h2>
-          <h1 className="sub-heading">{props.titleText}</h1>
-          <p className="sub-title">
-            {props.subTitleText}
-          </p>
-          <div className="buttons">
+          <RdsHeader size="h3" headerText={props.headingText}></RdsHeader>
+          <RdsHeader size="h1" headerText={props.titleText}></RdsHeader>
+
+          <RdsHeader size="h6" headerText={props.subTitleText}></RdsHeader>
+
+          <div className="buttons w-100">
             {props.showFirstButton &&(<RdsButton
                         label={props.firstButtonText}
                         type="button"
@@ -113,7 +115,7 @@ const RdsBanner = (props: RdsBannerProps) => {
                      {props.showHyperlink &&( 
                       <div className="links">
                          
-                        <a className="btn btn-light" href={props.hyperlink} target="_blank" rel="noopener noreferrer">
+                        <a className="btn text-primary bg-light" href={props.hyperlink} target="_blank" rel="noopener noreferrer">
                         <span className="me-2">
                         <RdsIcon
                           colorVariant="primary"
@@ -131,6 +133,7 @@ const RdsBanner = (props: RdsBannerProps) => {
           </div>
         </div>
       </div>)}
+      </span>
     </>
   );
 };

@@ -131,28 +131,27 @@
 }
 
 .input-with-image {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 10px; /* Add gap between images */
-  justify-content: flex-end; /* Align images to the right */
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px; /* Add gap between images */
+    justify-content: flex-end; /* Align images to the right */
+    border: 1px solid #000;
+    border-radius: var(--bs-border-radius);
 }
-
-.image-preview {
-  position: relative;
-  display: flex;
-  align-items: center;
-  bottom: 10px;
-  right: 10px;
-}
+    .input-with-image .form-controls {
+        border: none;
+        width: calc(100% - 2rem);
+        padding-right:2rem;
+    }
 
 .selected-image {
-  max-width: 100px;
-  max-height: 70px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
+    max-width: 50px;
+    max-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
 }
 
 .remove-image-button {
@@ -352,4 +351,22 @@
 .layout-4 .chat-image,
 .layout-4 .code-block {
   flex: 1 1 25%;
+}
+.image-preview {
+    position: relative;
+    align-items: center;   
+}
+
+.image-preview-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    right:40px; 
+    margin-top:1rem;
+}
+@media (max-width: 480px) {
+    .image-preview-group {
+        width:100%;
+        right:0px;
+    }
 }

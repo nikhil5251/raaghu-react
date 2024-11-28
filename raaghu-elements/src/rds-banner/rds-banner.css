@@ -1,148 +1,28 @@
-.challenge-banner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    padding: 20px;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-    flex-direction: row;
+#news-banner .challenge-banner {
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+}
+#news-banner .buttons {
+  display: flex;
+  gap: 10px;
+}
+/* Tablet (between 600px and 1200px) */
+@media (min-width: 600px) and (max-width: 1199px) {
+  #news-banner .challenge-banner {
+    flex-direction: column;
+    text-align: center;
   }
-  
-  .content {
-    max-width: 50%;
-  }
-  
-  .heading {
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-  
-  .sub-heading {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .sub-title {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .btn {
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .btn.primary {
-    background-color: #6c63ff;
-    color: #fff;
-  }
-  
-  .btn.secondary {
-    background-color: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-  }
-  
-  .image-container {
-    max-width: 40%;
-  }
-  
-  .image-container img {
-    max-width: 100%;
-  }
-  
-  /* Large screen (desktops, 1200px and above) */
-  @media (min-width: 1200px) {
-    .challenge-banner {
-      padding: 40px;
-    }
-  
-    .sub-heading {
-      font-size: 48px;
-    }
-  
-    .sub-title {
-      font-size: 18px;
-    }
-  }
-  
-  /* Tablet (between 600px and 1200px) */
-  @media (min-width: 600px) and (max-width: 1199px) {
-    .challenge-banner {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .content {
-      max-width: 100%;
-      margin-bottom: 20px;
-    }
-  
-    .sub-heading {
-      font-size: 32px;
-    }
-  
-    .sub-title {
-      font-size: 14px;
-    }
-  
-    .image-container {
-      max-width: 80%;
-    }
-  }
-  
-  /* Small screen (mobile devices, below 600px) */
-  @media (max-width: 599px) {
-    .challenge-banner {
-      flex-direction: column;
-      padding: 15px;
-      text-align: center;
-    }
-  
-    .content {
-      max-width: 100%;
-    }
-  
-    .heading {
-      font-size: 16px;
-    }
-  
-    .sub-heading {
-      font-size: 28px;
-    }
-  
-    .sub-title {
-      font-size: 12px;
-    }
-  
-    .buttons {
-      flex-direction: column;
-      gap: 5px;
-    }
-  
-    .btn {
-      width: 100%;
-    }
-  
-    .image-container {
-      max-width: 100%;
-      margin-top: 15px;
-    }
-  }
+}
 
-  .links a{
-    color: #7e2eef !important;
-    border: 2px solid #7e2eef !important;
-    font-weight: 500 !important;    
+/* Small screen (mobile devices, below 600px) */
+@media (max-width: 599px) {
+  #news-banner .challenge-banner {
+    text-align: center;
   }
+  #news-banner .buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+

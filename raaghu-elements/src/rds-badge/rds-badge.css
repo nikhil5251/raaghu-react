@@ -1,3 +1,4 @@
+#new-badges {
 .medium {
     font-size: 1.0rem !important;
 }
@@ -122,4 +123,5 @@
 .theme-dark .badge-dark {
     color: #ffffff;
     background-color: #7D7D7D;
+}
 }
