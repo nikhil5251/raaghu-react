@@ -37,11 +37,12 @@ const RdsCompDialog = (props: RdsCompDialogProps) => {
       case "large":
         return "col-12";
       case "small":
-        return "col-8";
+        return "col-3";
       default:
         return "";
     }
   };
+
   function resetToDefault(event:any): void {
     //handle the condition after clicking on cancel button
   }
@@ -73,57 +74,58 @@ const RdsCompDialog = (props: RdsCompDialogProps) => {
           </span>
         )}
       </div>
-       {props.ContentPosition?.toLowerCase() === "bottom" ? (
-        <div className="d-flex flex-column align-items-center">
-          {props.Icon && (
-            <RdsIcon
-              height="28px"
-              width="28px"
-              colorVariant={props.ColorVariant}
-              name={props.Icon}
-              fill={false}
-              stroke={true}
-            />
-          )}
-          {props.Content && <div className="dialog-content mt-2">{props.Content}</div>}
-        </div>
-      ) : (
-        <div className="d-flex align-items-center">
-          {props.Icon && <RdsIcon
-                height="28px"
-                width="28px"
-                colorVariant={props.ColorVariant}
-                name={props.Icon}
-                fill={false}
-                stroke={true}
-              /> 
-              }
-          {props.Content && <div className="dialog-content ms-2">{props.Content}</div>}
-        </div>
-      )}
+      {props.ContentPosition?.toLowerCase() === "bottom" ? (
+  <div className="d-flex flex-column align-items-center">
+    {props.Icon && (
+      <RdsIcon
+        height="28px"
+        width="28px"
+        colorVariant={props.ColorVariant}
+        name={props.Icon}
+        fill={false}
+        stroke={true}
+      />
+    )}
+    {props.Content && <div className="dialog-content text-center mt-2">{props.Content}</div>}
+  </div>
+) : (
+  <div className="d-flex flex-column align-items-center">
+    {props.Icon && (
+      <RdsIcon
+        height="28px"
+        width="28px"
+        colorVariant={props.ColorVariant}
+        name={props.Icon}
+        fill={false}
+        stroke={true}
+      />
+    )}
+    {props.Content && <div className="dialog-content mt-2 text-center">{props.Content}</div>}
+  </div>
+)}
 
-      <div className="dialog-actions gap-2">
-        {props.ShowSecondary && (
-          <RdsButton
-            type="button"
-            label="Cancel"
-            size="small"
-            colorVariant={`outline-${props.ColorVariant}`}
-            databsdismiss="offcanvas"
-             onClick={resetToDefault}
-          ></RdsButton>
-        )}
-        {props.ShowPrimary && (
-          <RdsButton
-            type="button"
-            label="Okay"
-            colorVariant={props.ColorVariant}
-            size="small"
-            databsdismiss="offcanvas"
-            onClick={handleSave}
-          ></RdsButton>
-        )}
-      </div>
+<div className={`dialog-actions gap-2 ${props.Size?.toLowerCase() === 'small' ? 'flex-column' : ''}`}>
+  {props.ShowSecondary && (
+    <RdsButton
+      type="button"
+      label="Cancel"
+      size="small"
+      colorVariant={`outline-${props.ColorVariant}`}
+      databsdismiss="offcanvas"
+      onClick={resetToDefault}
+    ></RdsButton>
+  )}
+  {props.ShowPrimary && (
+    <RdsButton
+      type="button"
+      label="Okay"
+      colorVariant={props.ColorVariant}
+      size="small"
+      databsdismiss="offcanvas"
+      onClick={handleSave}
+    ></RdsButton>
+  )}
+</div>
     </div>
     </>
   );

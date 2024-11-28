@@ -183,7 +183,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
         case 'card number':
           return 'Add Card Number';
           case 'otp':
-          return 'Enter OTP';
+          return '';
         case 'number':
           return 'Enter Number';
         case 'password':
@@ -199,7 +199,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
     return (
       <>
         {/* test  */}
-        <div className={`${labelClass()}`}>
+        <div className={`${labelClass()} mt-2`}>
           {props.showTitle && (
            <label
             htmlFor={props.id}
@@ -349,9 +349,12 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
             </Tooltip>
 
           )}
+          <div className="row">
+            <div className="col-6">
 {props.ShowHintText && (
                 <span className="hint-text">{props.HintText}</span>
-              )}
+              )}</div>
+              <div className="col-6">
           {props.required && !props.validationMsg && (
             <div className="form-control-feedback">
               {props.required && props.value == "" && hasError && isTouch && (
@@ -413,7 +416,8 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
                 {errorRegardingLengthOrValue}{" "}
               </span>
             </div>
-          )}
+          )}</div>
+          </div>
         </div>
       </>
     );

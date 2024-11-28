@@ -462,8 +462,9 @@ const RdsAiPromptBox = (props: RdsAiPromptBoxProps) => {
                 placeholder="Placeholder Text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-              />
-              {selectedImages.map((image, index) => (
+                              /><div className="image-preview-group">
+                              {selectedImages.map((image, index) => (
+                                  
                 <div key={index} className="image-preview">
                   <img
                     src={image}
@@ -476,8 +477,8 @@ const RdsAiPromptBox = (props: RdsAiPromptBoxProps) => {
                   >
                     ✖
                   </button>
-                </div>
-              ))}
+                                      </div>
+                              ))}</div>
             </div>
             <label htmlFor="file-upload" className={`file-upload-label`}>
               <RdsIcon

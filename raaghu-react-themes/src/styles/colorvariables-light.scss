@@ -4194,3 +4194,10 @@ $error-progress-color: conic-gradient( $bg-error-dark-default calc(var(--progres
 .avatar-solid, .avatar-dotted, .avatar-dashed {
     border-color: $input-neutral-outline-default;
 }
+.form-check-input-type-circular-indeterminate{
+    border-color:$primary;
+}
+.bg-layer {
+    background-color: rgb(255 255 255 / 57%);
+    padding: 1rem;
+}
