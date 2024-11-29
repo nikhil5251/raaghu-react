@@ -195,7 +195,7 @@ const isPeriodValid = (period: any) => {
                   dataTestId="notice-period"
                 ></RdsInput>
               </div>
-              <div className="mt-1">
+              <div className="py-2">
                 <RdsFileUploader
                   key={fileUploaderKey}
                   label="Upload Resume"

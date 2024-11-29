@@ -739,14 +739,14 @@ const Popup: React.FC<{
       )}
 
       <div className="pagination-container gap-2">
-        <RdsIcon
+       <span className="cursor-pointer"> <RdsIcon
           colorVariant="primary"
           height="20px"
           name="refresh"
           stroke
           width="20px"
           onClick={resetGrid}
-        />
+        /></span>
 
         {props.pagination && (
           <RdsPagination

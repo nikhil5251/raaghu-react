@@ -101,20 +101,8 @@ const RdsBadge = (props: RdsBadgeProps) => {
         <>
             <span id="new-badges">
              <span className={`badge ${getColorClass()} ${classes()} `} aria-disabled={props.style === "disabled"}>
-                {( props.layout =="Icon_only" || props.layout =="Icon+Text") && (
-                 (props.iconName && props.isIconshow === true && Icons.hasOwnProperty(props.iconName) &&(  <span className="">
-                        <RdsIcon
-                            name={props.iconName}
-                            fill={props.iconFill}
-                            stroke={props.iconStroke}
-                            width={props.iconWidth}
-                            height={props.iconHeight}
-                           
-                        />
-                    </span>))
-                   
-                )}
-                {props.iconName && props.iconPosition === 'left' && props.layout !="Text_only"  && Icons.hasOwnProperty(props.iconName) && (
+              
+                {(props.iconName  && props.layout=="Icon+Text" || props.layout=="Icon_only" ) && Icons.hasOwnProperty(props.iconName) && (
                     <RdsIcon
                         name={props.iconName}
                         fill={props.iconFill}
@@ -125,7 +113,7 @@ const RdsBadge = (props: RdsBadgeProps) => {
                 )}
                 {(props.layout =="Text_only" || props.layout == "Icon+Text" || props.layout== "Text+Icon" || props.textwithlabel) && (<span className="mb-0 p-1">{props.label}</span>)}
 
-                {(props.iconName && props.iconPosition === 'right' && props.layout !="Text_only" && props.layout != "Icon_only"  ) && Icons.hasOwnProperty(props.iconName) && (
+                {(props.iconName  && props.layout=="Text+Icon") && Icons.hasOwnProperty(props.iconName) && (
                     <RdsIcon
                         name={props.iconName}
                         fill={props.iconFill}

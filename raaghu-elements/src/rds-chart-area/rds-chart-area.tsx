@@ -41,6 +41,10 @@ const RdsAreaChart = (props: lineprops) => {
 
         chartRef.current = AreaCanvas;
 
+        AreaCanvas.canvas.style.height ="50vh";
+        AreaCanvas.canvas.style.width = "100vh";
+
+        
         return () => {
             if (chartRef.current) {
                 chartRef.current.destroy();

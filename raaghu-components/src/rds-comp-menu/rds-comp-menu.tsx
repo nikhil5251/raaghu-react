@@ -102,7 +102,7 @@ const isFormValid =isUrlValid(data?.url)&& isDisplayNameValid(data?.displayName)
                             onChange={(item: any) => handlePageId(item.value)}
                         ></RdsSelectList>
                     </div>
-                    <div className="col-md-12"><hr /></div>
+                    <div className="col-md-12"></div>
                     <div className="col-md-12 mb-3">
                         <RdsInput
                             label="Display Name"

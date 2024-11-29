@@ -58,11 +58,6 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
     useEffect(() => {
       setValue(props.value ?? "");
-  }, [props.value]);
-
-
-    useEffect(() => {
-      setValue(props.value ?? "");
     }, [props.value]);
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,72 +67,80 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       setHasError(!inputValue);
 
       if (props.validatonPattern && inputValue) {
-          const urlPattern = props.validatonPattern;
-          setIsValid(urlPattern.test(inputValue));
+        const urlPattern = props.validatonPattern;
+        setIsValid(urlPattern.test(inputValue));
       } else {
-          setIsValid(true);
+        setIsValid(true);
       }
 
       const valueLength = inputValue.length;
 
       if (inputValue) {
-          if (valueLength < (props.minLength || 0)) {
-              setErrorRegardingLengthOrValue(`This field must be a string or array type with a minimum length of ${props.minLength}.`);
-          } else if (valueLength > (props.maxLength || Infinity)) {
-              setErrorRegardingLengthOrValue(`This field must be a string or array type with a maximum length of ${props.maxLength}.`);
-          } else {
-              setErrorRegardingLengthOrValue("");
-          }
-
-          const numInputValue = Number(inputValue);
-
-          if (props.minValue !== undefined && numInputValue < props.minValue) {
-              setErrorRegardingLengthOrValue(`Value should be greater than ${props.minValue}`);
-          } else if (props.maxValue !== undefined && numInputValue > props.maxValue) {
-              setErrorRegardingLengthOrValue(`Value cannot be more than ${props.maxValue}`);
-          } else {
-              setErrorRegardingLengthOrValue("");
-          }
-      } else {
+        if (valueLength < (props.minLength || 0)) {
+          setErrorRegardingLengthOrValue(
+            `This field must be a string or array type with a minimum length of ${props.minLength}.`
+          );
+        } else if (valueLength > (props.maxLength || Infinity)) {
+          setErrorRegardingLengthOrValue(
+            `This field must be a string or array type with a maximum length of ${props.maxLength}.`
+          );
+        } else {
           setErrorRegardingLengthOrValue("");
+        }
+
+        const numInputValue = Number(inputValue);
+
+        if (props.minValue !== undefined && numInputValue < props.minValue) {
+          setErrorRegardingLengthOrValue(
+            `Value should be greater than ${props.minValue}`
+          );
+        } else if (props.maxValue !== undefined && numInputValue > props.maxValue) {
+          setErrorRegardingLengthOrValue(
+            `Value cannot be more than ${props.maxValue}`
+          );
+        } else {
+          setErrorRegardingLengthOrValue("");
+        }
+      } else {
+        setErrorRegardingLengthOrValue("");
       }
 
       setValue(inputValue);
-  };
+    };
+
     let size: "sm" | "lg" | undefined = undefined;
 
-    if (props.size == "small") {
+    if (props.size === "small") {
       size = "sm";
-    } else if (props.size == "large") {
+    } else if (props.size === "large") {
       size = "lg";
     }
-    const borderColorClass=
-    (props.state ==="active"?" inputOutlineActive ":"  ")+
-    (props.state ==="selected"?" inputOutlineSelected ":" ")+
-    (props.state ==="error"?" inputOutlineError ":"  ")+
-    (props.state==="default"?" inputOutline ":"  ")
-    ;
+
+    const borderColorClass =
+      (props.state === "active" ? " inputOutlineActive " : "  ") +
+      (props.state === "selected" ? " inputOutlineSelected " : " ") +
+      (props.state === "error" ? " inputOutlineError " : "  ") +
+      (props.state === "default" ? " inputOutline " : "  ");
 
     const inputClasses =
-      "form-control  mt-1 form-control-" +
+      "form-control mt-1 form-control-" +
       size +
       " flex-grow-1 " +
       props.customClasses +
       (props.state === "active" ? " inputActive" : "") +
-      (props.state === "selected" ? " inputSelected" : "")+
+      (props.state === "selected" ? " inputSelected" : "") +
       (props.state === "error" ? " inputError" : "") +
       (props.style === "Bottom Outline" ? borderColorClass : "") +
       (props.style === "Pill" ? " rounded-5" : " rounded ");
 
-
-
     const getClassNames = () => {
       let defaultClasses: string = "input-group mb-0";
-      if (props.labelPosition == "floating") {
+      if (props.labelPosition === "floating") {
         defaultClasses = "form-floating";
       }
       return defaultClasses;
     };
+
     const labelClass = () => {
       let labelPositionClass: string = "";
       if (props.labelPosition === "bottom") {
@@ -155,75 +158,122 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       }
       return labelPositionClass;
     };
+
     const fontWeight = "fw-" + props.fontWeight;
+
     const getPlaceholder = () => {
       switch (props.inputType) {
-        case 'phone number':
-          return 'Add Phone Number';
-        case 'card number':
-          return 'Add Card Number';
-          case 'otp':
-          return 'Enter OTP';
-        case 'number':
-          return 'Enter Number';
-        case 'password':
-          return 'Enter Password';
-        case 'email':
-          return 'Enter Email';
-        case 'text':
-          return 'Enter Text';
+        case "phone number":
+          return "Add Phone Number";
+        case "card number":
+          return "Add Card Number";
+        case "otp":
+          return "";
+        case "number":
+          return "Enter Number";
+        case "password":
+          return "Enter Password";
+        case "email":
+          return "Enter Email";
+        case "text":
+          return "Enter Text";
         default:
-          return 'Enter value';
+          return "Enter value";
       }
     };
-    return (
-      <div className="input-group mb-2">
-          <label htmlFor={props.id} className={`text-capitalize form-label ${props.fontWeight ? `fw-${props.fontWeight}` : ''}`}>
-              {props.label}
-              {(props.required || props.validatonPattern) && <span className="text-danger ms-1">*</span>}
-          </label>
-          <div>
-              <input
-                  type={props.inputType === "password" ? (showPassword ? "text" : "password") : props.inputType}
-                  maxLength={props.inputType === "otp" && props.singleDigit ? 1 : undefined}
-                  className={inputClasses}
-                  id={props.id}
-                  placeholder={props.placeholder}
-                  required={props.required}
-                  onFocus={props.onFocus}
-                  onBlur={props.onBlur}
-                  onKeyDown={props.onKeyDown}
-                  value={value ?? ""}
-                  onChange={handlerChange}
-                  disabled={props.isDisabled}
-                  readOnly={props.readonly}
-                  data-testid={props.dataTestId}
-                  onClick={props.onClick}
-                  ref={ref}
-              />
 
+    return (
+      <>
+        <div className={`${labelClass()} mt-2`}>
+          {props.showTitle && (
+            <label
+              htmlFor={props.id}
+              className={`text-capitalize mt-2 form-label ${fontWeight}`}
+            >
+              {props.label}
+              {(props.required || props.validatonPattern) && (
+                <span className="text-danger ms-1">*</span>
+              )}
+            </label>
+          )}
+          <div>
+            <input
+              type={
+                props.inputType === "password"
+                  ? showPassword
+                    ? "text"
+                    : "password"
+                  : props.inputType
+              }
+              maxLength={props.inputType === "otp" && props.singleDigit ? 1 : undefined}
+              className={inputClasses}
+              id={props.id}
+              placeholder={props.placeholder || getPlaceholder()}
+              required={props.required}
+              onFocus={props.onFocus}
+              onBlur={props.onBlur}
+              onKeyDown={props.onKeyDown}
+              value={value ?? ""}
+              onChange={handlerChange}
+              disabled={props.isDisabled}
+              readOnly={props.readonly}
+              data-testid={props.dataTestId}
+              onClick={props.onClick}
+              ref={ref}
+            />
           </div>
           {/* Error Messages */}
           {hasError && isTouch && (
-              <div className="form-control-feedback">
-                  {props.value === "" && (
-                      <span className="text-danger">{props.label} {t("is required")}</span>
+            <div className="form-control-feedback">
+              {props.value === "" && (
+                <span className="text-danger">
+                  {props.label} {t("is required")}
+                </span>
+              )}
+            </div>
+          )}
+          <div className="row">
+            <div className="col-6">
+              {props.ShowHintText && (
+                <span className="hint-text">{props.HintText}</span>
+              )}
+            </div>
+            <div className="col-6">
+              {props.required && !props.validationMsg && (
+                <div className="form-control-feedback">
+                  {props.required && props.value === "" && hasError && isTouch && (
+                    <span className="text-danger">
+                      {props.label} {t("is required") || ""}{" "}
+                    </span>
                   )}
-              </div>
-          )}
-          {props.validatonPattern && props.validationMsg && isTouch && !isValid && (
-              <div className="form-control-feedback">
-                  <span className="text-danger">{props.validationMsg}</span>
-              </div>
-          )}
-          {errorRegardingLengthOrValue && (
-              <div className="form-control-feedback">
-                  <span className="text-danger">{errorRegardingLengthOrValue}</span>
-              </div>
-          )}
-      </div>
-  );
-});
+                </div>
+              )}
+              {props.required && props.value !== "" && (
+                <div className="form-control-feedback">
+                  {props.validationMsg &&
+                    props.inputType === "password" &&
+                    isTouch && (
+                      <span className="text-danger">{props.validationMsg}</span>
+                    )}
+                </div>
+              )}
+              {errorRegardingLengthOrValue && (
+                <div className="form-control-feedback">
+                  <span className="text-danger">
+                    {errorRegardingLengthOrValue}{" "}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+);
 
-RdsInput.displayName = "RdsInput";
+RdsInput.defaultProps = {
+  showTitle: true,
+};
+
 export default RdsInput;

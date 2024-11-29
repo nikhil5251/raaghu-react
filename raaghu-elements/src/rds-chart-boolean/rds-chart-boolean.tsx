@@ -50,6 +50,10 @@ const RdsBooleanChart = (props: RdsBooleanChartProps) => {
                 options: props.options,
             });
 
+            if (boolCanvas !== null) {
+                boolCanvas.canvas.style.height = "50vh";
+                boolCanvas.canvas.style.width = "50vh";
+            }
             return () => {
                 boolCanvas.destroy();
             };

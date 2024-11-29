@@ -20,8 +20,6 @@ type Story = StoryObj<typeof RdsMixedChart>;
 export const MixedChart: Story = {
     args: {
         id: "mixed chart",
-        height: 300,
-        width: 300,
         dataSets: [
             {
                 type: "bar",
