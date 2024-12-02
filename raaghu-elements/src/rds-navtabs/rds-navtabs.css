@@ -35,3 +35,7 @@
     }
 }
 
+#features .nav-link.active {
+    background-color: #7e2eef !important;
+    color: white !important;
+}

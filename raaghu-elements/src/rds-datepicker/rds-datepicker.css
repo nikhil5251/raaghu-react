@@ -8,3 +8,12 @@
   cursor: not-allowed; /* Show a 'not allowed' cursor */
   background-color: #EBEBE4 !important;
 }
+
+.dropdown .btn {
+  text-align: center;
+}
+.isdisabled {
+  background-color: #e9ecef !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}

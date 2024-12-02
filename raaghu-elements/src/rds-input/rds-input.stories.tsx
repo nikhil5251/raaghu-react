@@ -10,11 +10,19 @@ const meta: Meta = {
     tags: ['autodocs'],
     argTypes: {
         size: {
-            options: ["small", "medium", "large"],
+            options: ["medium","small",  "large"],
             control: { type: "select" },
         },
         inputType: {
-            options: ["email", "text", "password", "otp","number"],
+            options: ["text","email", "password","number","phone number","card number", "otp"],
+            control: { type: "select" },
+        },
+        state: {
+            options: ["default","active", "selected","error","disable"],
+            control: { type: "select" },
+        },
+        style: {
+            options: ["Default","Bottom Outline", "Pill"],
             control: { type: "select" },
         },
         labelPosition: {
@@ -35,9 +43,13 @@ export const Default: Story = {
     args: {
         size: "medium",
         inputType: "text",
-        placeholder: "Add Placeholder",
+        state: "default",
+        style: "Default",
         label: "Label",
+        showTitle: true,
         labelPosition: "top",
+        HintText:"Hint Text",
+        ShowHintText:true,
         id: "",
         value: "",
         required: true,
@@ -45,32 +57,40 @@ export const Default: Story = {
         singleDigit: false,
     }
 } satisfies Story;
-Default.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'singleDigit'] } };
+Default.parameters = { controls: { include: ['size', 'inputType', 'state','style','placeholder', 'label','showTitle', 'labelPosition','HintText','showHintText', 'id', 'value', 'required', 'showIcon', 'singleDigit'] } };
 
 export const Tooltip: Story = {
     args: {
         size: "medium",
         inputType: "text",
-        placeholder: "Add Placeholder",
+        state: "default",
+        style: "Default",
         label: "Label",
+        showIcon: true,
         labelPosition: "top",
+        HintText:"Hint Text",
+        ShowHintText:true,
         id: "",
         value: "",
         required: true,
         tooltipPlacement: "top",
         tooltipTitle: "This is tooltip",
-        showIcon: true,
+        showTitle: true,
     }
 } satisfies Story;
-Tooltip.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'tooltipPlacement', 'tooltipTitle', 'showIcon'] } };
+Tooltip.parameters = { controls: { include: ['size', 'inputType', 'state','style','placeholder', 'label', 'showTitle', 'labelPosition', 'HintText','showHintText','id', 'value', 'required', 'tooltipPlacement', 'tooltipTitle','showIcon'] } };
 
 export const Disabled: Story = {
     args: {
         size: "medium",
         inputType: "text",
-        placeholder: "Add Placeholder",
+        state: "disable",
+        style: "Default",
         label: "Label",
+        showTitle: true,
         labelPosition: "top",
+        HintText:"Hint Text",
+        ShowHintText:true,
         id: "",
         value: "",
         required: true,
@@ -78,15 +98,19 @@ export const Disabled: Story = {
         showIcon: true,
     }
 } satisfies Story;
-Disabled.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'isDisabled', 'showIcon'] } };
+Disabled.parameters = { controls: { include: ['size', 'inputType', 'state','style','placeholder', 'label', 'showTitle','labelPosition','HintText','showHintText', 'id', 'value', 'required', 'isDisabled', 'showIcon'] } };
 
 export const Readonly: Story = {
     args: {
         size: "medium",
         inputType: "text",
-        placeholder: "Add Placeholder",
+        state: "default",
+        style: "Default",
         label: "Label",
+        showTitle: true,
         labelPosition: "top",
+        HintText:"Hint Text",
+        ShowHintText:true,
         id: "",
         value: "",
         required: true,
@@ -94,15 +118,19 @@ export const Readonly: Story = {
         showIcon: true,
     }
 } satisfies Story;
-Readonly.parameters = { controls: { include: ['size', 'inputType', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'readonly', 'showIcon'] } };
+Readonly.parameters = { controls: { include: ['size', 'inputType', 'state','style','placeholder', 'label','showTitle', 'labelPosition','HintText','showHintText', 'id', 'value', 'required', 'readonly', 'showIcon'] } };
 
 export const Email: Story = {
     args: {
         size: "medium",
         inputType: "email",
-        placeholder: "Add Email",
+        state: "default",
+        style: "Default",
         label: "Email",
+        showTitle: true,
         labelPosition: "top",
+        HintText:"Hint Text",
+        ShowHintText:true,
         id: "",
         value: "",
         required: true,
@@ -110,15 +138,19 @@ export const Email: Story = {
         showIcon: true,
     }
 } satisfies Story;
-Email.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required','showIcon', 'readonly'] } };
+Email.parameters = { controls: { include: ['size', 'state','style','placeholder', 'label', 'showTitle','labelPosition', 'HintText','showHintText','id', 'value', 'required','showTitle','showIcon', 'readonly'] } };
 
 export const Password: Story = {
     args: {
         size: "medium",
         inputType: "password",
-        placeholder: "Add Password",
+        state: "default",
+        style: "Default",
         label: "Password",
+        showTitle: true,
         labelPosition: "top",
+        HintText:"Hint Text",
+        ShowHintText:true,
         id: "",
         value: "",
         required: true,
@@ -126,4 +158,4 @@ export const Password: Story = {
         showIcon: true,
     }
 } satisfies Story;
-Password.parameters = { controls: { include: ['size', 'placeholder', 'label', 'labelPosition', 'id', 'value', 'required', 'showIcon', 'readonly'] } };
+Password.parameters = { controls: { include: ['size', 'state','style','placeholder', 'label','showTitle', 'labelPosition','HintText','showHintText', 'id', 'value', 'required', 'showIcon', 'readonly'] } };

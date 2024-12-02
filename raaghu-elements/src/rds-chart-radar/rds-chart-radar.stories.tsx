@@ -19,8 +19,6 @@ type Story = StoryObj<typeof RdsRadarChart>;
 export const RadarChart: Story = {
     args: {
         id: "Radar Chart",
-        width: 300,
-        height: 300,
         labels: [
             "Jan",
             "Feb",

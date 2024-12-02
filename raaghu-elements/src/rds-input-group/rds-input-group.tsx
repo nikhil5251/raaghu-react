@@ -25,8 +25,8 @@ export interface RdsInputGroupProps {
 const RdsInputGroup = (props: RdsInputGroupProps) => {
     const [value, setValue] = useState("");
     const inputGroupDivClasses =
-        "d-flex align-items-end input-group input-group-" +
-        (props.size === "small" ? "sm" : props.size === "large" ? "lg" : "md");
+    "d-flex align-items-end input-group input-group-" +
+    (props.size === "small" ? "sm" : "md");
     const inputGroupLabelClasses =
         props.size === "small"
             ? "fs-small-size"
