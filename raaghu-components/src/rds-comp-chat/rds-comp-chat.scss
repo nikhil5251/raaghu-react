@@ -137,15 +137,13 @@
 .text-muted {
     color: #969696;
 }
-.input-box{
-    box-shadow:0px 0px 6px 0px rgba(0, 0, 0, 0.08);
-
-    input
-{
+.input-box-chat{
+  box-shadow:0px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  input {
     border: 0px;
     margin-top: 0px !important;
     padding: 2px;
-}
+  }
 }
 .emoji-popup {
   position: absolute;
