@@ -123,7 +123,6 @@ const RdsAlert = (props: RdsAlertProps) => {
                                         colorVariant="primary"
                                         onClick={(e: any) => closeHandler(e)}
                                         label="Okay"
-                                        size="small"
                                     />
                                 )}
                                <div className={`d-flex align-items-center justify-content-end gap-2 alert-close alert-${props.size}`}>
@@ -195,7 +194,6 @@ const RdsAlert = (props: RdsAlertProps) => {
                                         colorVariant="primary"
                                         onClick={(e: any) => closeHandler(e)}
                                         label="Okay"
-                                        size="small"
                                     />
                                 )}
                             </div>
