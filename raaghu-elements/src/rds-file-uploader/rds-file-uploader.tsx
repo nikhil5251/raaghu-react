@@ -17,7 +17,7 @@ export interface RdsFileUploaderProps {
   colorVariant?: string;
   multiple?: boolean;
   extensions: string;
-  limit: number;
+  limit?: number;
   label: string;
   onFileArray?: (files: any[]) => void;
   getFileUploaderInfo?: any;
@@ -115,7 +115,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
     if (files && files.length > 0) {
       const selectedFiles = Array.from(files);
       const exceededFiles = selectedFiles.filter(
-        (file) => file.size > props.limit * 1048576
+        (file) => props.limit !== undefined && file.size > props.limit * 1048576
       ); // Check against the limit
 
       if (exceededFiles.length > 0) {
