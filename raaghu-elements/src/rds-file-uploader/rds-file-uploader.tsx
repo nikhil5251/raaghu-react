@@ -182,11 +182,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
       newFiles.push(file);
     });
 
-    if (props.multiple) {
-      setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-    } else {
-      setSelectedFiles(newFiles.slice(-1)); // only keep the last selected file
-    }
+   
 
     setValidation(newValidation);
 
