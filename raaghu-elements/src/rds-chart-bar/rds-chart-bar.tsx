@@ -26,12 +26,15 @@ const RdsBarChart = (props: RdsBarChartProps) => {
                 options: props.options,
             });
 
+            barCanvas.canvas.style.height = "60vh";
+            barCanvas.canvas.style.width = "100vh";
+        
             return () => {
                 barCanvas.destroy();
             };
         }
     }, []);
-
+    
     return (
         <div>
             <canvas data-testid={CanvasId} id={CanvasId} ref={canvasRef} />

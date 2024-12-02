@@ -26,6 +26,10 @@ const RdsLineChart = (props: Rdslineprops) => {
                 options: props.options,
             });
             
+            if(lineCanvas !== null) {
+                lineCanvas.canvas.style.height = "50vh";
+                lineCanvas.canvas.style.width = "100vh";
+            }
             return () => {
                 lineCanvas.destroy();
             };

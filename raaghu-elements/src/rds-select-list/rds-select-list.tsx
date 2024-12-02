@@ -78,7 +78,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
   };
  
   // Determine if the items have 'option' or 'label' and map accordingly
-  const mappedSelectItems = props.selectItems.map((item) => ({
+  const mappedSelectItems = props.selectItems?.map((item) => ({
     label: item.label || item.option,
     value: item.value,
     imgUrl: item.imgUrl,
@@ -88,7 +88,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
  
   const selectedItem = props.isMultiple
     ? mappedSelectItems.filter((item: any) => selectedValue?.includes(item.value))
-    : mappedSelectItems.find((item: any) => item.value === selectedValue);
+    : mappedSelectItems?.find((item: any) => item.value === selectedValue);
  
   const Option = (optionProps: any) => {
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -20,7 +20,6 @@ type Story = StoryObj<typeof RdsStackedChart>;
 export const StackedChart: Story = {
     args: {
         id: "Stacked Chart",
-        height: 300,
         labels: [
             "Jan",
             "Feb",
