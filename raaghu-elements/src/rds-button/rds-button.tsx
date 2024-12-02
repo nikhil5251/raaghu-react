@@ -78,7 +78,7 @@ const RdsButton = (props: RdsButtonProps) => {
     return (<Fragment>
         {props.tooltip ? (
             < Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
-                <button className={`btn ` + `${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner}
+                <button className={`btn ${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner + (props.textCase ? ` text-${props.textCase}` : "")}
                     disabled={props.isDisabled}
                     type={btnType}
                     form={props.formName}
@@ -106,7 +106,7 @@ const RdsButton = (props: RdsButtonProps) => {
                 </button>
             </Tooltip>
         ) :
-            <button className={`btn ` + `${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner}
+        <button className={`btn ${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner + (props.textCase ? ` text-${props.textCase}` : "")}
                 disabled={props.isDisabled}
                 type={btnType}
                 form={props.formName}

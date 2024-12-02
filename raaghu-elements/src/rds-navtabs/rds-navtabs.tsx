@@ -78,7 +78,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
               ? " select-tabs"
               
               : props.type === "tabs"
-              ? "  border-3 text-primary"
+              ? " text-primary"
       : props.style === "pills"
       ? " nav-pills"
       : props.style === "tabs"
@@ -102,7 +102,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
                 : props.style === "Vertical -Flap"
                 ? " vertical-flap"
                 : props.type === "tabs"
-                ? " border-3 text-primary"
+                ? " text-primary"
         : props.style === "pills"
         ? " nav-pills"
         : props.style === "tabs"
@@ -122,7 +122,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
     >
       <a
         className={
-          "nav-link px-0 pe-auto " +
+          "nav-link px-0 pe-auto mt-2" +
           (props.type === "tabs"
             ? " rounded-0"
             : props.layout === "Vertical"
