@@ -121,13 +121,13 @@ const RdsCompAccount = (props: RdsCompAccountProps) => {
       <form>
         <div className="custom-content-scroll">
           <div className="row pt-xxl-3 pt-xl-3 pt-lg-3 pt-md-3 pt-0 ">
-            <div className="col-xxl-3 col-xl-3 col-lg-3 col-12 d-xxl-block d-xl-block d-lg-block d-md-table d-flex pb-0  pe-xxl-4 pe-xl-4 pe-lg-4 pe-md-4 pe-0">
+            <div className="col-xxl-3 col-xl-3 col-lg-3  d-xxl-block d-xl-block d-lg-block d-md-table d-flex pb-0  pe-xxl-4 pe-xl-4 pe-lg-4 pe-md-4 pe-0">
               <RdsNavtabs
                 navtabsItems={navtabsItems}
                 layout="Vertical"
                 fill={false}
                 type="tabs"
-                style="Select Tabs"
+                style="Vertical -Pointer"
                 justified={false}
                 activeNavTabId={activeNavTabId}
                 activeNavtabOrder={(activeNavTabId) => {

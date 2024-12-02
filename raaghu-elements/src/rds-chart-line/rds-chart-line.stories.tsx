@@ -18,9 +18,7 @@ type Story = StoryObj<typeof RdsLineChart>;
 
 
 export const LineChart: Story = {
-    args: {
-        height: 250,
-        width: 650,
+    args: {        
         labels: ["January", "February", "March", "April", "May", "Jun", "July"],
         options: {
             pointStyle: "star",

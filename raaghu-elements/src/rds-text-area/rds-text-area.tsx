@@ -57,7 +57,7 @@ const RdsTextArea = (props: RdsTextAreaProps) => {
     props.onChange && props.onChange(e);
   };
   const getClassNames = () => {
-    let defaultClasses: string = "mb-0 mt-1";
+    let defaultClasses: string = "mb-0 ";
     if (props.isFloatingInputLabel === true) {
       defaultClasses = "form-floating";
     }
@@ -85,7 +85,7 @@ const RdsTextArea = (props: RdsTextAreaProps) => {
                     )}
                   </label>
                 )}
-                <div className={`${getClassNames()} mt-2`}>
+                <div className={`${getClassNames()} `}>
                   <textarea
                     className="form-control "
                     disabled={props.isDisabled}
@@ -140,7 +140,7 @@ const RdsTextArea = (props: RdsTextAreaProps) => {
               {props.isRequired && <span className="text-danger fs-6"> *</span>}
             </label>
           )}
-          <div className={`${getClassNames()} mt-2`}>
+          <div className={`${getClassNames()} `}>
             <textarea
               className="form-control mt-1"
               disabled={props.isDisabled}

@@ -24,8 +24,6 @@ export const BooleanChart: Story = {
     args: {
         id: "BooleanId",
         centerIconName: "users",
-        height: 100,
-        width: 100,
         dataSets: [
             {
                 label: "Dataset 1",

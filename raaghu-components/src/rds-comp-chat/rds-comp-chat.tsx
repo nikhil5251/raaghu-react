@@ -240,6 +240,7 @@ const RdsCompUserComments: React.FC<RdsCompUserCommentsProps> = ({
                             name="comment"
                             onChange={(e) => setCommentText(e.target.value)}
                             showIcon={true}
+                            
                         />
                     </span>
                     <span className="d-flex align-items-center mx-2">
@@ -249,8 +250,7 @@ const RdsCompUserComments: React.FC<RdsCompUserCommentsProps> = ({
                             stroke={true}
                             colorVariant="primary"
                             isCursorPointer={true}
-                            width="30px"
-                            height="30px"
+                            
                             onClick={handleAddComment}
                         />
                     </span>

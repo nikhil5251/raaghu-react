@@ -88,7 +88,7 @@ export const Circular: Story = {
                 max: 300,
             },
             table: {
-                defaultValue: { summary: 80 },
+                defaultValue: { summary: "80" },
             }
         }
     }
