@@ -29,6 +29,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
     const [hoveredItem, setHoveredItem] = useState("");
     const [menuToShow, filterMenus] = useState(mainMenu);
     const [searchQuery, setSearchQuery] = useState("");   
+    const logo = props.logo ? props.logo : "https://raaghustorageaccount.blob.core.windows.net/raaghu-blob/raaghu-design-system-lightmode.png";
     const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
     const addFilter = (value: string) => {
         setSearchQuery(value);
@@ -320,7 +321,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
                         {props.layout != "RightSideNav" && (
                             <>  
                                 <br></br>
-                                <img src={props.logo!= "" ? props.logo : ""} className="ps-2" alt={props.logo != ""? "Raaghu Side Navigation" : ""} 
+                                <img src={logo!= "" ? logo : ""} className="ps-2" alt={logo != ""? "Raaghu Side Navigation" : ""} 
                                     style={{ height:"30px" }}></img>
                             </>
                         )}
