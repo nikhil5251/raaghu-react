@@ -223,13 +223,11 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
             />
           </div>
           {/* Error Messages */}
-          {hasError && isTouch && (
+          {hasError && isTouch && props.value === "" && (
             <div className="form-control-feedback">
-              {props.value === "" && (
-                <span className="text-danger">
-                  {props.label} {t("is required")}
-                </span>
-              )}
+              <span className="text-danger">
+                {props.label} {t("is required")}
+              </span>
             </div>
           )}
           <div className="row">
@@ -239,22 +237,11 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               )}
             </div>
             <div className="col-6">
-              {props.required && !props.validationMsg && (
+              {props.required && props.value !== "" && props.validationMsg && (
                 <div className="form-control-feedback">
-                  {props.required && props.value === "" && hasError && isTouch && (
-                    <span className="text-danger">
-                      {props.label} {t("is required") || ""}{" "}
-                    </span>
+                  {props.inputType === "password" && isTouch && (
+                    <span className="text-danger">{props.validationMsg}</span>
                   )}
-                </div>
-              )}
-              {props.required && props.value !== "" && (
-                <div className="form-control-feedback">
-                  {props.validationMsg &&
-                    props.inputType === "password" &&
-                    isTouch && (
-                      <span className="text-danger">{props.validationMsg}</span>
-                    )}
                 </div>
               )}
               {errorRegardingLengthOrValue && (
