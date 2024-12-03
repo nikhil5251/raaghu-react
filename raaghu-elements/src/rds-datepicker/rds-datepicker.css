@@ -17,3 +17,7 @@
   opacity: 1 !important;
   pointer-events: none !important;
 }
+
+.react-datepicker__day--outside-month {
+  color: #6c757d !important;
+}
