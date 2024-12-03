@@ -12,7 +12,7 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     colorVariant: {
-      options: progress_colors,
+      options: Object.values(progress_colors),
       control: { type: "select" },
       description: 'The color variant of the progress bar.',
     },
