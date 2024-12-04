@@ -7,7 +7,7 @@
   /* Space between label and input */
 }
 
-.form-label {
+#labelText .form-label {
   margin-bottom: 0.25rem;
   /* Add a little space below the label */
   white-space: nowrap;
@@ -24,14 +24,6 @@
   /* Space between label and input */
 }
 
-.form-label {
-  margin-bottom: 0.25rem;
-  /* Add a little space below the label */
-  white-space: nowrap;
-  /* Prevent wrapping if needed */
-  display: block;
-  /* Ensure label takes full width */
-}
 
 .form-control {
   flex-grow: 1;

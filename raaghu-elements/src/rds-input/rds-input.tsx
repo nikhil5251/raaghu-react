@@ -199,6 +199,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
         <div className={`${labelClass()} mt-2`}>
           {props.showTitle && (
             <label
+            id="labelText"
               htmlFor={props.id}
               className={`text-capitalize mt-2 form-label ${fontWeight}`}
             >
