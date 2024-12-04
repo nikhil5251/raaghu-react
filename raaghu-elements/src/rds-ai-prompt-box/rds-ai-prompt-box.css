@@ -369,3 +369,14 @@
         right:0px;
     }
 }
+.btn{
+  border:0px;
+}
+.btn:focus{
+  outline: none;
+  border:0px;
+}
+.btn:active{
+  outline: none;
+  border:0px;
+}

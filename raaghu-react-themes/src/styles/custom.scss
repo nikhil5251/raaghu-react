@@ -1499,7 +1499,7 @@ $toast-padding-y: $spacing-s;
         bottom: 0;
         top: -26px;
         width: 0.1875rem;
-        height: 162%;
+        height: 163%;
         border-right: 1.5px dashed lightgray;
         z-index: 0;
     }
@@ -3663,3 +3663,4 @@ label.form-check-label.ms-2.undefined{
     width: 58px;
     font-weight: 600;
 }
+.input-with-image .form-controls:focus{ outline:none ;}
