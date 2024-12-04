@@ -31,7 +31,7 @@ const RdsButton = (props: RdsButtonProps) => {
 
     const classesButton = () => {
         let defaultClass: string = " position-relative align-items-center ";
-        const sizeClass = "btn-" + (props.size === "small" ? "sm " : props.size === "medium" ? "md " : props.size === "large" ? "lg " : "md ");
+        const sizeClass = "btn-" + (props.size === "small" ? "sm " : props.size === "medium" ? "md " : props.size === "large" ? "lg " : " ");
         defaultClass = defaultClass + sizeClass;
 
         if (props.icon) {
@@ -78,7 +78,7 @@ const RdsButton = (props: RdsButtonProps) => {
     return (<Fragment>
         {props.tooltip ? (
             < Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
-                <button className={`btn ` + `${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner}
+                <button className={`btn ${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner + (props.textCase ? ` text-${props.textCase}` : "")}
                     disabled={props.isDisabled}
                     type={btnType}
                     form={props.formName}
@@ -106,7 +106,7 @@ const RdsButton = (props: RdsButtonProps) => {
                 </button>
             </Tooltip>
         ) :
-            <button className={`btn ` + `${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner}
+        <button className={`btn ${props.isOutline ? "btn-outline-" + props.colorVariant : "btn-" + props.colorVariant}` + classesButton() + spinner + (props.textCase ? ` text-${props.textCase}` : "")}
                 disabled={props.isDisabled}
                 type={btnType}
                 form={props.formName}

@@ -42,4 +42,5 @@ export interface RdsButtonProps {
     iconSize?:size;
     isRoundedButton?: boolean;
     isBanerButton?: boolean;
+    textCase?: string;
 }
