@@ -216,7 +216,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
                     className="pe-xxl-0 pe-xl-0 pe-lg-0 pe-md-0 pe-0"
                     value={item.key + "_" + parent}
                     onClick={() => onMenuClick(item, parent, level, !item.children)}
-                    style={{ paddingLeft: `${level * 20}px` }}  // Indentation for nested levels
+                   
                 >
                     <a
                         href={item.path}
@@ -341,7 +341,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
                         )}
 
                         {props.layout === "LeftSideNavList" && !props.collapse && (
-                            <div className="LeftSideNavList"><RdsSearch 
+                            <div className={`${collapse ? "LeftSideNavList" : "LeftSideNavListCollapse" }`}><RdsSearch 
                                 label=""
                                 placeholder="Search"
                                 value={searchQuery}
