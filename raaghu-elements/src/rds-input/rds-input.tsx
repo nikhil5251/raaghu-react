@@ -60,11 +60,23 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       setValue(props.value ?? "");
     }, [props.value]);
 
+    const formatCardNumber = (inputValue: string) => {
+      return inputValue.replace(/\s?/g, '').replace(/(\d{4})/g, '$1 ').trim();
+    };
+
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = e.target.value;
+      let inputValue = e.target.value;
       setIsTouch(true);
       props.onChange && props.onChange(e);
       setHasError(!inputValue);
+
+      if (props.inputType === "card number") {
+        inputValue = formatCardNumber(inputValue);
+      }
+
+      if (props.inputType === "phone number") {
+        inputValue = inputValue.replace(/\D/g, ''); // Remove non-numeric characters
+      }
 
       if (props.validatonPattern && inputValue) {
         const urlPattern = props.validatonPattern;
@@ -73,7 +85,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
         setIsValid(true);
       }
 
-      const valueLength = inputValue.length;
+      const valueLength = inputValue.replace(/\s/g, '').length; // Exclude spaces from length
 
       if (inputValue) {
         if (valueLength < (props.minLength || 0)) {
@@ -88,7 +100,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
           setErrorRegardingLengthOrValue("");
         }
 
-        const numInputValue = Number(inputValue);
+        const numInputValue = Number(inputValue.replace(/\s/g, ''));
 
         if (props.minValue !== undefined && numInputValue < props.minValue) {
           setErrorRegardingLengthOrValue(
@@ -205,7 +217,8 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
                     : "password"
                   : props.inputType
               }
-              maxLength={props.inputType === "otp" && props.singleDigit ? 1 : undefined}
+              minLength={props.minLength}
+              maxLength={props.maxLength}
               className={inputClasses}
               id={props.id}
               placeholder={props.placeholder || getPlaceholder()}
