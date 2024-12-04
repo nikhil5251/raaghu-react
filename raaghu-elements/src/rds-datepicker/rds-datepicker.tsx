@@ -161,17 +161,19 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     }, [props.dateForEdit]);
 
     const dayClassName = (date: Date) => {
-        const currentMonth = startDate?.getMonth() || today.getMonth();
-        const selectedDate = date.getDate();
+        const today = new Date();
+        const referenceDate = startDate ?? today; // Use `startDate` if defined, otherwise fallback to today
+    
+        const referenceMonth = referenceDate.getMonth();
+        const referenceYear = referenceDate.getFullYear();
+    
         const selectedMonth = date.getMonth();
         const selectedYear = date.getFullYear();
+    
+        // Conditions to check if the date is in a previous or next month
+        const isPrevMonth = selectedYear < referenceYear || (selectedYear === referenceYear && selectedMonth < referenceMonth);
+        const isNextMonth = selectedYear > referenceYear || (selectedYear === referenceYear && selectedMonth > referenceMonth);
 
-        const isPrevMonth = selectedMonth !== currentMonth && selectedYear === today.getFullYear();
-        const isNextMonth = selectedMonth !== currentMonth && selectedYear === today.getFullYear();
-
-        if (isPrevMonth || isNextMonth) {
-            return "text-muted";
-        }
         return "";
     };
 

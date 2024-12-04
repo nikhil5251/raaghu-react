@@ -21,3 +21,7 @@
 .react-datepicker__day--outside-month {
   color: #6c757d !important;
 }
+
+.react-datepicker__day--outside-month:hover {
+  background-color: transparent;
+}
