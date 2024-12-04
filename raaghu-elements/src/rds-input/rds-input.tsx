@@ -61,7 +61,8 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
     }, [props.value]);
 
     const formatCardNumber = (inputValue: string) => {
-      return inputValue.replace(/\s?/g, '').replace(/(\d{4})/g, '$1 ').trim();
+      inputValue = inputValue.replace(/\D/g, '');
+      return inputValue.replace(/(\d{4})/g, '$1 ').trim();
     };
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +76,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       }
 
       if (props.inputType === "phone number") {
-        inputValue = inputValue.replace(/\D/g, ''); // Remove non-numeric characters
+        inputValue = inputValue.replace(/[^\d+]/g, ''); 
       }
 
       if (props.validatonPattern && inputValue) {
