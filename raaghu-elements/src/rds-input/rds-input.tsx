@@ -79,6 +79,10 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
         inputValue = inputValue.replace(/[^\d+]/g, ''); 
       }
 
+      if (props.inputType === "otp") {
+        inputValue = inputValue.replace(/\D/g, ''); // Remove all non-digit characters
+      }
+
       if (props.validatonPattern && inputValue) {
         const urlPattern = props.validatonPattern;
         setIsValid(urlPattern.test(inputValue));
