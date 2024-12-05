@@ -169,7 +169,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                 </label>
             )}
             {props.type === "default" && (
-                    <div className="input-group input-group-datePicker mb-3 mt-1">
+                    <div className="input-group input-group-datePicker mb-3">
                         {/* <div className="input-group-append datepicker__icon-box">
                             <span className="input-group-text cursor-pointer" id="basic-addon2">
                                 <RdsIcon
