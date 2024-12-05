@@ -369,14 +369,15 @@
         right:0px;
     }
 }
-.btn{
+
+.generate-button{
   border:0px;
 }
-.btn:focus{
+.generate-button:focus{
   outline: none;
   border:0px;
 }
-.btn:active{
+.generate-button:active{
   outline: none;
   border:0px;
 }
