@@ -196,7 +196,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
     return (
       <>
-        <div className={`${labelClass()} ${props.id === 'address-input' ? '' : 'mt-2'}`}>
+        <div id="inputs" className={`${labelClass()} ${props.id === 'address-input' ? '' : 'mt-2'}`}>
           {props.showTitle && (
             <label
               htmlFor={props.id}
