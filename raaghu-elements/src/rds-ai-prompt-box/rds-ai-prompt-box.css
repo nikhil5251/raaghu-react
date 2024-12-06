@@ -369,3 +369,15 @@
         right:0px;
     }
 }
+
+.generate-button{
+  border:0px;
+}
+.generate-button:focus{
+  outline: none;
+  border:0px;
+}
+.generate-button:active{
+  outline: none;
+  border:0px;
+}
