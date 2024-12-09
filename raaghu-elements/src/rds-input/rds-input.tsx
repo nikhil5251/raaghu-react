@@ -76,11 +76,20 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       }
 
       if (props.inputType === "phone number") {
-        inputValue = inputValue.replace(/[^\d+]/g, ''); 
+        inputValue = inputValue.replace(/[^\d+]/g, '');
+        if (inputValue.includes('+')) {
+          inputValue = '+' + inputValue.replace(/\+/g, ''); // Keep only the first '+' at the start
+        }
+        if (inputValue.startsWith('+')) {
+          inputValue = '+' + inputValue.substring(1, 13); // Include '+' and up to 12 digits
+        } else {
+          inputValue = inputValue.substring(0, 12); // No '+' case, limit to 12 digits
+        }
       }
 
       if (props.inputType === "otp") {
-        inputValue = inputValue.replace(/\D/g, ''); // Remove all non-digit characters
+        inputValue = inputValue.replace(/\D/g, '');
+        inputValue = inputValue.substring(0, 6);
       }
 
       if (props.validatonPattern && inputValue) {
