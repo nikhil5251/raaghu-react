@@ -160,6 +160,23 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         }
     }, [props.dateForEdit]);
 
+    const dayClassName = (date: Date) => {
+        const today = new Date();
+        const referenceDate = startDate ?? today; // Use `startDate` if defined, otherwise fallback to today
+    
+        const referenceMonth = referenceDate.getMonth();
+        const referenceYear = referenceDate.getFullYear();
+    
+        const selectedMonth = date.getMonth();
+        const selectedYear = date.getFullYear();
+    
+        // Conditions to check if the date is in a previous or next month
+        const isPrevMonth = selectedYear < referenceYear || (selectedYear === referenceYear && selectedMonth < referenceMonth);
+        const isNextMonth = selectedYear > referenceYear || (selectedYear === referenceYear && selectedMonth > referenceMonth);
+
+        return "";
+    };
+
     return (
         <>
             {props.showTitle && props.title && (
@@ -169,7 +186,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                 </label>
             )}
             {props.type === "default" && (
-                    <div className="input-group input-group-datePicker mb-3 mt-1">
+                    <div className="input-group input-group-datePicker mb-3">
                         {/* <div className="input-group-append datepicker__icon-box">
                             <span className="input-group-text cursor-pointer" id="basic-addon2">
                                 <RdsIcon
@@ -199,6 +216,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                             showMonthDropdown={props.datepickerStyle === "Dropdown"}
                             showYearDropdown={props.datepickerStyle === "Dropdown"}
                             dropdownMode="select"
+                            dayClassName={dayClassName} 
                         />
                         <span className="input-group-text cursor-pointer" id="basic-addon2">
                             <RdsIcon
@@ -293,6 +311,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                 dropdownMode="select"
                                 showPreviousMonths
                                 monthsShown={props.layout === "MultiMonth" ? 3 : 1}
+                                dayClassName={dayClassName} 
                             />
                         </ul>
                     </div>
@@ -318,6 +337,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                             showPreviousMonths
                             monthsShown={props.layout === "MultiMonth" ? 3 : 1}
                             todayButton={<CustomButtons />}
+                            dayClassName={dayClassName} 
                         />
                         <span className="input-group-text cursor-pointer" id="basic-addon2" >
                             <RdsIcon
