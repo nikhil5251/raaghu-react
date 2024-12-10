@@ -276,6 +276,32 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
             )}
           </div>
           {/* Error Messages */}
+          {props.inputType === "password" && props.showIcon ? (
+        <RdsIcon
+          name={showPassword ? "eye" : "eye_slash"}
+          classes="password-toggle"
+          height="16px"
+          width="16px"
+          id="icon"
+          fill={false}
+          stroke={true}
+          opacity="0.5"
+          onClick={() => setShowPassword(!showPassword)}
+        />
+      ) : (
+        props.showIcon && (
+          <RdsIcon
+            name="information"
+            classes="password-toggle"
+            height="16px"
+            width="16px"
+            id="icon"
+            fill={false}
+            stroke={true}
+            opacity="0.5"
+          />
+        )
+      )}
         </div>
       </>
     );
