@@ -60,22 +60,22 @@
 // };
 
 import type { Meta, StoryObj } from '@storybook/react';
-import RdsCompCardDetailList from "./rds-comp-card-detail-list";
+import RdsCompBankCardDetailList from "./rds-comp-bank-card-detail-list";
 
 
 const meta: Meta = { 
-    title: "Components/Detail List",
-    component: RdsCompCardDetailList,
+    title: "Components/Bank Card Detail List",
+    component: RdsCompBankCardDetailList,
     parameters: {
         layout: 'padded',
     },
     tags: ['autodocs'],
     argTypes: {
     },
-} satisfies Meta<typeof RdsCompCardDetailList>;
+} satisfies Meta<typeof RdsCompBankCardDetailList>;
 
 export default meta;
-type Story = StoryObj<typeof RdsCompCardDetailList>;
+type Story = StoryObj<typeof RdsCompBankCardDetailList>;
 
 export const Default: Story = {
     args: {
