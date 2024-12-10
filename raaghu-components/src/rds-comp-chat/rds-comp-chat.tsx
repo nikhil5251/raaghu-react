@@ -155,19 +155,43 @@ const RdsCompUserComments = (props: RdsCompUserCommentsProps) => {
                 </div>
               </div>
 
-              {/* Show delete icon for current user comments */}
-              {isCurrentUser && showDeleteIcon && (
-                <span className="d-flex align-items-top me-1">
-                  <RdsIcon
-                    name="delete"
-                    fill={false}
-                    stroke={true}
-                    colorVariant="danger"
-                    isCursorPointer={true}
-                    width="18px"
-                    height="18px"
-                    onClick={() => handleDeleteComment(index)}
-                  />
+                {isEmojiPicker && (
+                    <span className="me-2">
+                        <RdsIcon
+                            name="smileys"
+                            fill={false}
+                            stroke={true}
+                            colorVariant="neutral"
+                            isCursorPointer={true}
+                            width="30px"
+                            height="30px"
+                            onClick={() => setShowEmojiPicker(!showEmojiPicker)} // Toggle emoji picker
+                        />
+                    </span>
+                )}
+                <span className="w-100 d-flex  p-1">
+                    <span className="w-100">
+                        <RdsInput
+                            value={commentText}
+                            inputType="text"
+                            placeholder="Type comment..."
+                            name="comment"
+                            onChange={(e) => setCommentText(e.target.value)}
+                            showIcon={true}
+                            
+                        />
+                    </span>
+                    <span className="d-flex align-items-center mx-2">
+                        <RdsIcon
+                            name="send_email"
+                            fill={false}
+                            stroke={true}
+                            colorVariant="primary"
+                            isCursorPointer={true}
+                            
+                            onClick={handleAddComment}
+                        />
+                    </span>
                 </span>
               )}
 
