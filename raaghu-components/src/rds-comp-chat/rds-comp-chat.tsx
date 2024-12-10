@@ -122,7 +122,7 @@ const RdsCompUserComments = (props: RdsCompUserCommentsProps) => {
 
   return (
     <div className={`comments-container ${width}`}>
-      {commentList.map((comment, index) => {
+     {commentList.map((comment, index) => {
         const isCurrentUser = comment.firstName === currentUser.firstName && comment.lastName === currentUser.lastName;
         const showDeleteIcon = allowDelete && (Date.now() - (comment.addedTime || 0) < deleteIconTimeout); // Show delete icon based on timeout
 
@@ -155,47 +155,7 @@ const RdsCompUserComments = (props: RdsCompUserCommentsProps) => {
                 </div>
               </div>
 
-                {isEmojiPicker && (
-                    <span className="me-2">
-                        <RdsIcon
-                            name="smileys"
-                            fill={false}
-                            stroke={true}
-                            colorVariant="neutral"
-                            isCursorPointer={true}
-                            width="30px"
-                            height="30px"
-                            onClick={() => setShowEmojiPicker(!showEmojiPicker)} // Toggle emoji picker
-                        />
-                    </span>
-                )}
-                <span className="w-100 d-flex  p-1">
-                    <span className="w-100">
-                        <RdsInput
-                            value={commentText}
-                            inputType="text"
-                            placeholder="Type comment..."
-                            name="comment"
-                            onChange={(e) => setCommentText(e.target.value)}
-                            showIcon={true}
-                            
-                        />
-                    </span>
-                    <span className="d-flex align-items-center mx-2">
-                        <RdsIcon
-                            name="send_email"
-                            fill={false}
-                            stroke={true}
-                            colorVariant="primary"
-                            isCursorPointer={true}
-                            
-                            onClick={handleAddComment}
-                        />
-                    </span>
-                </span>
-              )}
-
-              {isCurrentUser && !showDeleteIcon && (
+              {showDeleteIcon && isCurrentUser && (
                 <span className="d-flex align-items-top me-1 d-none">
                   <RdsIcon
                     name="delete"
@@ -214,14 +174,13 @@ const RdsCompUserComments = (props: RdsCompUserCommentsProps) => {
             <div className={`comment-footer d-flex ${isCurrentUser ? 'justify-content-end' : 'justify-content-start'}`}>
               <div className="username">{comment.firstName} {comment.lastName}</div>
               <div className="date text-muted ms-2">
-                <div className="date text-muted ms-2">
-                  {formatDate(new Date(comment.date), dateFormat)}
-                </div>
+                {formatDate(new Date(comment.date), dateFormat)}
               </div>
             </div>
           </div>
         );
       })}
+
 
       <div className="comment-input mt-4">
         {/* Emoji Picker */}
@@ -257,7 +216,7 @@ const RdsCompUserComments = (props: RdsCompUserCommentsProps) => {
             />
           </span>
         )}
-        <span className="w-100 d-flex input-box-chat border p-1">
+        <span className="w-100 d-flex input-box-chat p-1">
           <span className="w-100">
             <RdsInput
               value={commentText}
