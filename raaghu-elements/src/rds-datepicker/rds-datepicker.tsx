@@ -313,7 +313,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                 dropdownMode="select"
                                 showPreviousMonths
                                 monthsShown={props.layout === "Multi Month" ? 3 : 1}
-                                popperModifiers={[{ name: 'offset', options: { offset: [43, 0] }}]}
+                                popperModifiers={[{ name: 'offset', options: { offset: [34, 0] }}]}
                                 dayClassName={dayClassName} 
                             />
                         </ul>
