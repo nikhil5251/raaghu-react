@@ -61,7 +61,8 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
     }, [props.value]);
 
     const formatCardNumber = (inputValue: string) => {
-      return inputValue.replace(/\s?/g, '').replace(/(\d{4})/g, '$1 ').trim();
+      inputValue = inputValue.replace(/\D/g, '');
+      return inputValue.replace(/(\d{4})/g, '$1 ').trim();
     };
 
     const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +76,20 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       }
 
       if (props.inputType === "phone number") {
-        inputValue = inputValue.replace(/\D/g, ''); // Remove non-numeric characters
+        inputValue = inputValue.replace(/[^\d+]/g, '');
+        if (inputValue.includes('+')) {
+          inputValue = '+' + inputValue.replace(/\+/g, ''); // Keep only the first '+' at the start
+        }
+        if (inputValue.startsWith('+')) {
+          inputValue = '+' + inputValue.substring(1, 13); // Include '+' and up to 12 digits
+        } else {
+          inputValue = inputValue.substring(0, 12); // No '+' case, limit to 12 digits
+        }
+      }
+
+      if (props.inputType === "otp") {
+        inputValue = inputValue.replace(/\D/g, '');
+        inputValue = inputValue.substring(0, 6);
       }
 
       if (props.validatonPattern && inputValue) {
@@ -120,13 +134,16 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       setValue(inputValue);
     };
 
-    let size: "sm" | "lg" | undefined = undefined;
+    let size: "sm" | "lg" | "md";
 
     if (props.size === "small") {
       size = "sm";
     } else if (props.size === "large") {
       size = "lg";
+    } else {
+      size = "md";
     }
+
 
     const borderColorClass =
       (props.state === "active" ? " inputOutlineActive " : "  ") +
@@ -138,7 +155,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       "form-control mt-1 form-control-" +
       size +
       " flex-grow-1 " +
-      props.customClasses +
+      (props.customClasses? props.customClasses:"") +
       (props.state === "active" ? " inputActive" : "") +
       (props.state === "selected" ? " inputSelected" : "") +
       (props.state === "error" ? " inputError" : "") +
@@ -196,7 +213,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
     return (
       <>
-        <div className={`${labelClass()} mt-2`}>
+        <div className={`${labelClass()} position-relative`}>
           {props.showTitle && (
             <label
             id="labelText"
@@ -209,7 +226,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               )}
             </label>
           )}
-          <div>
+          <div className="mb-3">
             <input
               type={
                 props.inputType === "password"
@@ -223,7 +240,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               className={inputClasses}
               id={props.id}
               placeholder={props.placeholder || getPlaceholder()}
-              required={props.required}
+              required={props.required ?? false}
               onFocus={props.onFocus}
               onBlur={props.onBlur}
               onKeyDown={props.onKeyDown}
@@ -235,38 +252,31 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               onClick={props.onClick}
               ref={ref}
             />
+            <div className="validation-position">
+              <div className="col-12">
+                {props.required && value !== "" && props.validationMsg && !isValid && (
+                  <div className="form-control-feedback">
+                    <span className="text-danger">{props.validationMsg}</span>
+                  </div>
+                )}
+                {errorRegardingLengthOrValue && (
+                  <div className="form-control-feedback">
+                    <span className="text-danger">
+                      {errorRegardingLengthOrValue}{" "}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+            {hasError && isTouch && props.required && value === "" && (
+              <div className="form-control-feedback validation-position">
+                <span className="text-danger">
+                  {props.label} {t("is required")}
+                </span>
+              </div>
+            )}
           </div>
           {/* Error Messages */}
-          {hasError && isTouch && props.value === "" && (
-            <div className="form-control-feedback">
-              <span className="text-danger">
-                {props.label} {t("is required")}
-              </span>
-            </div>
-          )}
-          <div className="row">
-            <div className="col-6">
-              {props.ShowHintText && (
-                <span className="hint-text">{props.HintText}</span>
-              )}
-            </div>
-            <div className="col-6">
-              {props.required && props.value !== "" && props.validationMsg && (
-                <div className="form-control-feedback">
-                  {props.inputType === "password" && isTouch && (
-                    <span className="text-danger">{props.validationMsg}</span>
-                  )}
-                </div>
-              )}
-              {errorRegardingLengthOrValue && (
-                <div className="form-control-feedback">
-                  <span className="text-danger">
-                    {errorRegardingLengthOrValue}{" "}
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </>
     );
@@ -275,6 +285,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
 RdsInput.defaultProps = {
   showTitle: true,
+  required: false,
 };
 
 export default RdsInput;
