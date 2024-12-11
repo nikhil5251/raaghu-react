@@ -91,7 +91,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
                     height="12"
-                    fill="gray"
+                    fill="white"
                     className="bi bi-caret-right-fill "
                     viewBox="0 0 16 16"
                 >
@@ -311,6 +311,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                 dropdownMode="select"
                                 showPreviousMonths
                                 monthsShown={props.layout === "Multi Month" ? 3 : 1}
+                                popperModifiers={[{ name: 'offset', options: { offset: [43, 0] }}]}
                                 dayClassName={dayClassName} 
                             />
                         </ul>
