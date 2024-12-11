@@ -30,6 +30,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const datePickerRef = useRef<DatePicker | null>(null);
 
     const onRangeChange = (dates: [Date | null, Date | null]) => {
         if (props.customDate && typeof props.customDate === 'function') {
@@ -217,8 +218,9 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                             showYearDropdown={props.datepickerStyle === "Dropdown"}
                             dropdownMode="select"
                             dayClassName={dayClassName} 
+                            ref={datePickerRef}
                         />
-                        <span className="input-group-text cursor-pointer" id="basic-addon2">
+                        <span className="input-group-text cursor-pointer" id="basic-addon2" onClick={() => datePickerRef.current && datePickerRef.current.setFocus()}>
                             <RdsIcon
                                 name="calendar"
                                 width="20px"
