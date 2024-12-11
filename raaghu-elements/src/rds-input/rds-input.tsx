@@ -134,13 +134,16 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       setValue(inputValue);
     };
 
-    let size: "sm" | "lg" | undefined = undefined;
+    let size: "sm" | "lg" | "md";
 
     if (props.size === "small") {
       size = "sm";
     } else if (props.size === "large") {
       size = "lg";
+    } else {
+      size = "md";
     }
+
 
     const borderColorClass =
       (props.state === "active" ? " inputOutlineActive " : "  ") +
@@ -152,7 +155,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
       "form-control mt-1 form-control-" +
       size +
       " flex-grow-1 " +
-      props.customClasses +
+      (props.customClasses? props.customClasses:"") +
       (props.state === "active" ? " inputActive" : "") +
       (props.state === "selected" ? " inputSelected" : "") +
       (props.state === "error" ? " inputError" : "") +
@@ -210,7 +213,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
     return (
       <>
-        <div id="inputs" className={`${labelClass()} ${props.id === 'address-input' ? '' : 'mt-2'}`}>
+        <div className={`${labelClass()} position-relative`}>
           {props.showTitle && (
             <label
               htmlFor={props.id}
@@ -222,7 +225,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               )}
             </label>
           )}
-          <div>
+          <div className="mb-3">
             <input
               type={
                 props.inputType === "password"
@@ -236,7 +239,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               className={inputClasses}
               id={props.id}
               placeholder={props.placeholder || getPlaceholder()}
-              required={props.required}
+              required={props.required ?? false}
               onFocus={props.onFocus}
               onBlur={props.onBlur}
               onKeyDown={props.onKeyDown}
@@ -248,38 +251,57 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               onClick={props.onClick}
               ref={ref}
             />
+            <div className="validation-position">
+              <div className="col-12">
+                {props.required && value !== "" && props.validationMsg && !isValid && (
+                  <div className="form-control-feedback">
+                    <span className="text-danger">{props.validationMsg}</span>
+                  </div>
+                )}
+                {errorRegardingLengthOrValue && (
+                  <div className="form-control-feedback">
+                    <span className="text-danger">
+                      {errorRegardingLengthOrValue}{" "}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+            {hasError && isTouch && props.required && value === "" && (
+              <div className="form-control-feedback validation-position">
+                <span className="text-danger">
+                  {props.label} {t("is required")}
+                </span>
+              </div>
+            )}
           </div>
           {/* Error Messages */}
-          {hasError && isTouch && props.value === "" && (
-            <div className="form-control-feedback">
-              <span className="text-danger">
-                {props.label} {t("is required")}
-              </span>
-            </div>
-          )}
-          <div className="row">
-            <div className="col-6">
-              {props.ShowHintText && (
-                <span className="hint-text">{props.HintText}</span>
-              )}
-            </div>
-            <div className="col-6">
-              {props.required && props.value !== "" && props.validationMsg && (
-                <div className="form-control-feedback">
-                  {props.inputType === "password" && isTouch && (
-                    <span className="text-danger">{props.validationMsg}</span>
-                  )}
-                </div>
-              )}
-              {errorRegardingLengthOrValue && (
-                <div className="form-control-feedback">
-                  <span className="text-danger">
-                    {errorRegardingLengthOrValue}{" "}
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
+          {props.inputType === "password" && props.showIcon ? (
+        <RdsIcon
+          name={showPassword ? "eye" : "eye_slash"}
+          classes="password-toggle"
+          height="16px"
+          width="16px"
+          id="icon"
+          fill={false}
+          stroke={true}
+          opacity="0.5"
+          onClick={() => setShowPassword(!showPassword)}
+        />
+      ) : (
+        props.showIcon && (
+          <RdsIcon
+            name="information"
+            classes="password-toggle"
+            height="16px"
+            width="16px"
+            id="icon"
+            fill={false}
+            stroke={true}
+            opacity="0.5"
+          />
+        )
+      )}
         </div>
       </>
     );
@@ -288,6 +310,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
 RdsInput.defaultProps = {
   showTitle: true,
+  required: false,
 };
 
 export default RdsInput;

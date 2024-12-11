@@ -97,6 +97,7 @@ const RdsCard = (props: RdsCardProps) => {
                           withProfilePic={true}
                           roundedAvatar={true}
                           profilePic={props.src}
+                          size="small"
                         ></RdsAvatar>
                       </div>
                     </div>
@@ -111,6 +112,7 @@ const RdsCard = (props: RdsCardProps) => {
                           withProfilePic={true}
                           roundedAvatar={true}
                           profilePic={props.src}
+                           size="small"
                         ></RdsAvatar>
                       </div>
                     </div>
@@ -127,6 +129,7 @@ const RdsCard = (props: RdsCardProps) => {
                       withProfilePic={true}
                       roundedAvatar={true}
                       profilePic={props.src}
+                      size="small"
                     ></RdsAvatar>
                   </div>
                 </div>
