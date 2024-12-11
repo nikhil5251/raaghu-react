@@ -133,7 +133,7 @@ const RdsCompAddressInput = (props: RdsCompAddressInputProps) => {
                         </div>
                     </div>
                     <div className="col-md-6 ">
-                        <label htmlFor="state" className="form-label">
+                        <label htmlFor="state" className="form-label mt-2">
                             City
                         </label>
                         <div className="form-group">
