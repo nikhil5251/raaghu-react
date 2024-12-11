@@ -13,7 +13,7 @@ export interface RdsDatepickerProps {
     onDatePicker?: any;
     datepickerStyle?: "Dropdown" | "Selector" ;
     type?: "default" | "advanced" | "withTime";
-    layout?: "default" | "MonthPicker" | "YearPicker" | "MultiMonth";
+    layout?: "Default" | "Month Picker" | "Year Picker" | "Multi Month";
     customDate?: any;
     isDropdownOpen: boolean;
     isDisabled?: boolean;
@@ -206,10 +206,10 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                             wrapperClassName="datepicker__wrapper"
                             disabled={props.isDisabled} 
                             placeholderText={props.placeholderText || "Select date"}
-                            showMonthYearPicker={props.layout === "MonthPicker"}
-                            showYearPicker={props.layout === "YearPicker"}
+                            showMonthYearPicker={props.layout === "Month Picker"}
+                            showYearPicker={props.layout === "Year Picker"}
                             showPreviousMonths
-                            monthsShown={props.layout === "MultiMonth" ? 3 : 1}
+                            monthsShown={props.layout === "Multi Month" ? 3 : 1}
                             scrollableMonthYearDropdown={props.datepickerStyle === "Dropdown"}
                             todayButton={<CustomButtons />}
                             peekNextMonth={true}
@@ -302,15 +302,15 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                 customInput={<ExampleCustomInput />}
                                 disabled={props.isDisabled}
                                 placeholderText={props.placeholderText || "Select date"}
-                                showMonthYearPicker={props.layout === "MonthPicker"}
-                                showYearPicker={props.layout === "YearPicker"}
+                                showMonthYearPicker={props.layout === "Month Picker"}
+                                showYearPicker={props.layout === "Year Picker"}
                                 todayButton={<CustomButtons />}
                                 peekNextMonth={true}
                                 showMonthDropdown={props.datepickerStyle === "Dropdown"}
                                 showYearDropdown={props.datepickerStyle === "Dropdown"}
                                 dropdownMode="select"
                                 showPreviousMonths
-                                monthsShown={props.layout === "MultiMonth" ? 3 : 1}
+                                monthsShown={props.layout === "Multi Month" ? 3 : 1}
                                 dayClassName={dayClassName} 
                             />
                         </ul>
@@ -328,14 +328,14 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                             showTimeInput
                             disabled={props.isDisabled}
                             placeholderText={props.placeholderText || "Select date"}
-                            showMonthYearPicker={props.layout === "MonthPicker"}
-                            showYearPicker={props.layout === "YearPicker"}
+                            showMonthYearPicker={props.layout === "Month Picker"}
+                            showYearPicker={props.layout === "Year Picker"}
                             peekNextMonth={true}
                             showMonthDropdown={props.datepickerStyle === "Dropdown"}
                             showYearDropdown={props.datepickerStyle === "Dropdown"}
                             dropdownMode="select"
                             showPreviousMonths
-                            monthsShown={props.layout === "MultiMonth" ? 3 : 1}
+                            monthsShown={props.layout === "Multi Month" ? 3 : 1}
                             todayButton={<CustomButtons />}
                             dayClassName={dayClassName} 
                         />
