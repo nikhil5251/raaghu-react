@@ -195,7 +195,7 @@ const isPeriodValid = (period: any) => {
                   dataTestId="notice-period"
                 ></RdsInput>
               </div>
-              <div className="py-2">
+              <div className="py-3">
                 <RdsFileUploader
                   key={fileUploaderKey}
                   label="Upload Resume"
@@ -218,11 +218,11 @@ const isPeriodValid = (period: any) => {
               </div>
             </div>
 
-            <div className="col-md-6 col-sm-12">
+            <div className="col-md-6 col-sm-12 mt-3">
               <RdsTextArea
                 label="Cover Letter"
                 placeholder="Cover Letter.."
-                rows={5}
+                rows={7}
                 onChange={(e) => {
                   handleDataChanges(e.target.value, "coverLetter");
                 }}
