@@ -89,8 +89,8 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                 </div>
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-lg-6 col-md-6 ">
+            <div className="row mb-3">
+              <div className="col-md-9 sm-p-0">
                 <div className="mb-3">
                   <RdsInput
                     placeholder="Enter Phone Nunber"
@@ -109,8 +109,8 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   ></RdsInput>
                 </div>
               </div>
-              <div className="col-lg-6 col-md-6">
-                <div className="mb-2">
+              <div className="col-md-9 sm-p-0">
+                <div className="mb-3">
                   <RdsInput
                     placeholder="Enter Username"
                     inputType="text"
