@@ -213,12 +213,12 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
     return (
       <>
-        <div className={`${labelClass()} position-relative`}>
+        <div className={`mb-2 ${labelClass()} position-relative`}>
           {props.showTitle && (
             <label
             id="labelText"
               htmlFor={props.id}
-              className={`text-capitalize mt-2 form-label ${fontWeight}`}
+              className={`text-capitalize mt-2 ${fontWeight}`}
             >
               {props.label}
               {(props.required || props.validatonPattern) && (
@@ -282,7 +282,9 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
                 ref={ref}
               />
             )}
-            <div className="validation-position">
+          
+          </div>
+          <div className="validation-position">
               <div className="col-12">
                 {props.required && value !== "" && props.validationMsg && !isValid && (
                   <div className="form-control-feedback">
@@ -299,13 +301,12 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
               </div>
             </div>
             {hasError && isTouch && props.required && value === "" && (
-              <div className="form-control-feedback validation-position mt-5">
+              <div className="form-control-feedback validation-position">
                 <span className="text-danger">
                   {props.label} {t("is required")}
                 </span>
               </div>
             )}
-          </div>
           {/* Error Messages */}
           {props.inputType === "password" && props.showIcon ? (
             <RdsIcon
