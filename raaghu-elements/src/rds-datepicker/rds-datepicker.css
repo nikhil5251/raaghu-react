@@ -23,7 +23,7 @@
 }
 
 .react-datepicker__day--outside-month:hover {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .react-datepicker__today-button {
