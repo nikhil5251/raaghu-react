@@ -157,7 +157,6 @@ const isFormValid = isProfileNameValid(formData?.ProfileName) && isEmailValid(fo
               label="Current password"
               reset={inputReset}
               required
-              id="mysettingspage"
               placeholder="Current password"
               inputType="password"
               onChange={(e) => handleDataChanges(e, "curPass")}
@@ -174,7 +173,6 @@ const isFormValid = isProfileNameValid(formData?.ProfileName) && isEmailValid(fo
               label="New password"
               reset={inputReset}
               required
-              id="mysettingspage"
               placeholder="New password"
               inputType="password"
               onChange={(e) => handleDataChanges(e, "newPass")}
@@ -191,7 +189,6 @@ const isFormValid = isProfileNameValid(formData?.ProfileName) && isEmailValid(fo
               label="Confirm new password"
               reset={inputReset}
               required
-              id="mysettingspage"
               placeholder="Confirm new password"
               inputType="password"
               onChange={(e) => handleDataChanges(e, "curNewPass")}

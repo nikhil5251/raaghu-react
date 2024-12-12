@@ -311,7 +311,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
           {props.inputType === "password" && props.showIcon ? (
             <RdsIcon
               name={showPassword ? "eye" : "eye_slash"}
-              classes={props.id== 'mysettingspage'? "password-toggle mysettingspage":"password-toggle"}
+              classes={"password-toggle mysettingspage"}
               height="16px"
               width="16px"
               id={"iconPassword" + props.labelPosition}
