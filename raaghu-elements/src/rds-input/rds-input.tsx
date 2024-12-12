@@ -213,7 +213,7 @@ const RdsInput = React.forwardRef<HTMLInputElement, RdsInputProps>(
 
     return (
       <>
-        <div className={`mb-2 ${labelClass()} position-relative`}>
+        <div className={` ${props.id == "passwordfield" ? "":"mb-2"} ${labelClass()} position-relative`}>
           {props.showTitle && (
             <label
             id="labelText"
